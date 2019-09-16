@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">-->
+    <title>国际学校四库全书-咨询项目库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_616804_678w1t3vo45qm2t9.css">
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="src/css/guest/guest.css">
+    <link rel="stylesheet" href="src/css/guest/guestpublic.css">
+    <link rel="stylesheet" href="src/css/guest/rencaiku.css">
+    <style>
+        .pageDemo01{
+            height: 100px;
+        }
+        .bottomLine{
+            margin-top: 20px;
+        }
+        .myshuju{
+            margin-top:20px;
+        }
+        .myshuju label{
+            width: 150px;
+
+        }
+        .myshuju input{
+            width: 320px;
+        }
+        .myshuju textarea{
+            width: 320px;
+            min-height: 100px;
+        }
+        .talent-list_left02 p{
+            display: inline-block;
+            width: 33%;
+        }
+        .talent-list_workExperience{
+            min-height: 60px;
+        }
+        .zixiangmu p {
+            display: inline-block;
+            width: 30%;
+        }
+        .bottomLine{
+            padding-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!--搜索框  -->
+    <div style="margin-left:20px;" class="searchPart">
+        <form method="get" class="searchForm">
+            <button style="display:inline-block;" class="layui-btn" id="addguest">添加项目信息</button>
+            <!-- <div class="row" style="display:inline-block;margin-left:200px;">
+                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-9 search_box">
+                    <input type="text" placeholder="搜索项目信息" class="search" id="searchKey">
+                </div>
+                <span class="btn btn-primary glyphicon glyphicon-search search_icon" id="search"></span>
+            </div> -->
+        </form>
+    </div>
+
+    <!-- 搜索结果 -->
+    <div class="wrapAll">
+        <div>
+            <div id="result" class="" style="margin-top: 25px;">
+                
+            </div>
+        </div>
+
+    </div>
+    <!-- 分页 -->
+    <div class="container-fluid pageFooter" style="text-align:center;padding:15px 0;">
+        <div class="generalSearchResult" style="display: block;">
+            <p>已搜索到<span class="gengeralSearchNum" style="font-weight: bold;color: lightcoral;padding: 0px 4px;">0</span>条结果</p>
+            <div id="pageDemo01">
+
+            </div>
+        </div>
+    </div>
+   
+    <script src="./plugins/layui/layui.js"></script>
+    <script src="./plugins/jq/jquery.min.js"></script>
+    <script src="./plugins/jq/jquery.cookie.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./src/js/config.js"></script>
+    <script src="src/js/consult/consult.js"></script>
+</body> 
+
+</html>

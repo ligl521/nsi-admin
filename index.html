@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>NSI ADMIN</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="./src/css/app.css" media="all" />
+    <link rel="stylesheet" href="./src/css/themes/default.css" media="all" id="skin" kit-skin />
+    <style>
+        input::-webkit-input-placeholder{
+            color:#fff;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#fff;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#fff;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+            color:#fff;
+        }
+       @media screen and (max-width: 769px){
+           .shadowWrap{ position:absolute; top:0; bottom:0; left:0;  right:0;  background:#000;  opacity:0.7;z-index: 1000;display: none; }
+           .layui-nav .mobile{display: none;}
+           .site-tree-mobile{
+               display: block;
+               position: fixed;
+               z-index: 100000;
+               bottom: 15px;
+               left: 30px;
+               width: 50px;
+               height: 50px;
+               line-height: 50px;
+               border-radius: 2px;
+               text-align: center;
+               background-color: rgba(0,0,0,.7);
+               color: #fff;}
+       }
+    </style>
+</head>
+
+<!--遮罩-->
+<div class="shadowWrap">
+</div>
+
+<!--锁屏-->
+<div id="lockScreen" style="display: none;" >
+    <div class="" id="lock-box" style="margin-top:10px;width: 360px;height: 210px;padding:20px;background: #fff;text-align: center;">
+        <div  ><img src="http://m.zhengjinfan.cn/images/0.jpg" style="width: 60px;height: 60px;border-radius: 30px;"></div>
+        <div  id="lockUserName" style="margin-top: 8px;margin-bottom: 15px;color: #009688;">请叫我马哥</div>
+        <div class="input_btn">
+            <input type="text" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" style="border-radius:2px;width: 180px;height:38px;padding-left:10px;background: #009688;color: #fff;border: none;">
+            <button class="layui-btn" id="unlock" style="position: relative;top:-1px;">解锁</button>
+        </div>
+        <p style="margin-top: 15px;color: red;">请输入登录邮箱，否则不会解锁成功哦！！！</p>
+    </div>
+</div>
+
+<body class="kit-theme">
+
+    <div class="layui-layout layui-layout-admin kit-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">NSI ADMIN</div>
+            <div class="layui-logo kit-logo-mobile">NSI ADMIN</div>
+            <ul class="layui-nav layui-layout-left kit-nav">
+                <li class="layui-nav-item mobile" id="systemMessage">
+                    <a href="javascript:;" > <i class="fa fa-bullhorn"></i>&nbsp;&nbsp;系统消息 <span class="layui-badge-dot layui-hide" style="position: static;" id="systemInfoDot"></span></a>
+                </li>
+                <!--<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>-->
+                <!--<li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>-->
+                <!--<li class="layui-nav-item">-->
+                    <!--<a href="javascript:;">其它系统</a>-->
+                    <!--<dl class="layui-nav-child">-->
+                        <!--<dd><a href="javascript:;">邮件管理</a></dd>-->
+                        <!--<dd><a href="javascript:;">消息管理</a></dd>-->
+                        <!--<dd><a href="javascript:;">授权管理</a></dd>-->
+                    <!--</dl>-->
+                <!--</li>-->
+            </ul>
+            <ul class="layui-nav layui-layout-right kit-nav">
+                <li class="layui-nav-item mobile" id="toLockScreen">
+                    <a href="javascript:;">
+                        <i class="fa fa-lock"></i> &nbsp;&nbsp;锁屏
+                    </a>
+                </li>
+                <li class="layui-nav-item mobile">
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe63f;</i> 皮肤
+                    </a>
+                    <dl class="layui-nav-child skin">
+                        <dd><a href="javascript:;" data-skin="default" style="color:#393D49;"><i class="layui-icon">&#xe658;</i> 默认</a></dd>
+                        <dd><a href="javascript:;" data-skin="orange" style="color:#ff6700;"><i class="layui-icon">&#xe658;</i> 橘子橙</a></dd>
+                        <dd><a href="javascript:;" data-skin="green" style="color:#00a65a;"><i class="layui-icon">&#xe658;</i> 原谅绿</a></dd>
+                        <dd><a href="javascript:;" data-skin="pink" style="color:#FA6086;"><i class="layui-icon">&#xe658;</i> 少女粉</a></dd>
+                        <dd><a href="javascript:;" data-skin="blue.1" style="color:#00c0ef;"><i class="layui-icon">&#xe658;</i> 天空蓝</a></dd>
+                        <dd><a href="javascript:;" data-skin="red" style="color:#dd4b39;"><i class="layui-icon">&#xe658;</i> 枫叶红</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" >
+                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img" > <span id="username"> Van </span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" kit-target data-options="{url:'basic.html',icon:'&#xe658;',title:'基本资料',id:'966'}"><span>基本资料</span></a></dd>
+                        <dd><a href="javascript:;">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a onclick="exitLogin()"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出登录</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black kit-side" id="mobileSide">
+            <div class="layui-side-scroll" >
+                <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul id="roleAll" class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                    <li class="layui-nav-item layui-nav-itemed index1">
+                        <a class="" href="javascript:;" data-icon="fa-television" > <i class="fa fa-television"></i> <span> 首页</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index11">
+                                <a href="javascript:;"  data-icon="fa-graduation-cap" data-url="data-schoolVerify.html" data-title="学校数据审核" kit-target data-id='11'>
+                                    <i class="fa fa-graduation-cap"></i><span> 学校数据审核</span>
+                                    <span class="layui-badge-dot" id="schoolVerifyDot" style="position: static;"></span>
+                                </a>
+                            </dd>
+                            <dd class="index12"> 
+                                <a href="javascript:;" data-url="data-instiVerify.html" data-icon="fa-institution" data-title="机构数据审核" kit-target data-id='12'>
+                                    <i class="fa fa-institution" ></i><span> 机构数据审核</span>
+                                    <span class="layui-badge-dot" id="instiVerifyDot" style="position: static;"></span>
+                                </a>
+                            </dd>
+                            <dd class="index13">
+                                <a href="javascript:;" data-url="data-talent-Verify.html" data-icon="fa-address-card-o" data-title="人才库审核" kit-target data-id='13'><i class="fa fa-address-card-o"></i><span> 人才库审核</span>
+                                <span class="layui-badge-dot" id="talentVerifyDot" style="position: static;"></span>
+                                </a>
+                            </dd>
+                            <dd class="index14">
+                                <a href="javascript:;"  data-icon="fa-graduation-cap" data-url="data-blacklistVerify.html" data-title="外教黑名单审核" kit-target data-id='14'>
+                                    <i class="fa fa-user-circle-o"></i><span> 外教黑名单审核</span>
+                                    
+                                </a>
+                            </dd>
+                            <dd class="index15">
+                                <a href="javascript:;" data-url="app.html" data-icon="fa-address-card-o" data-title="简历审核" kit-target data-id='15'><i class="fa fa-address-card-o"></i><span> 简历审核</span></a>
+                            </dd>
+                            <dd class="index16">
+                                <a href="javascript:;" data-url="app.html" data-icon="fa-handshake-o" data-title="招聘单位审核" kit-target data-id='16'><i class="fa fa-handshake-o"></i><span> 招聘单位审核</span></a>
+                            </dd>
+                            <dd class="index17">
+                                <a href="javascript:;" kit-target data-options="{url:'app.html',icon:'fa-folder-o',title:'项目审核',id:'17'}"><i class="fa fa-folder-o"></i><span> 项目审核</span></a>
+                            </dd>
+                            <dd class="index18">
+                                <a href="javascript:;" kit-target data-options="{url:'feedback.html',icon:'fa-folder-o',title:'用户反馈',id:'18'}"><i class="fa fa-folder-o"></i><span> 用户反馈</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index2">
+                        <a href="javascript:;"><i class="fa fa-line-chart" aria-hidden="true"></i><span> 数据库 </span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index21" id="schoolControl"><a href="javascript:;" kit-target data-options="{url:'data-school.html',icon:'fa-graduation-cap',title:'学校库',id:'21'}"><i class="fa fa-graduation-cap"></i><span> 学校库</span></a></dd>
+                            <dd class="index22" id="institutionControl"><a href="javascript:;" kit-target data-options="{url:'data-insti.html',icon:'fa-institution',title:'机构库',id:22}"><i class="fa fa-institution"></i><span> 机构库</span></a></dd>
+                            <dd class="index23" id="blacklistControl"><a href="javascript:;" kit-target data-options="{url:'data-blacklist.html',icon:'fa-user-circle-o',title:'外教黑名单',id:'23'}"><i class="fa fa-user-circle-o"></i><span> 外教黑名单</span></a></dd>
+                            <dd class="index24" id="talentControl"><a href="javascript:;" kit-target data-options="{url:'data-talent.html',icon:'fa-user-circle-o',title:'人才库',id:'24'}"><i class="fa fa-user-circle-o"></i><span> 人才库</span></a></dd>
+                            <dd class="index25" id="projectControl"><a href="javascript:;" kit-target data-options="{url:'app.html',icon:'fa-folder-o',title:'项目库',id:'25'}"><i class="fa fa-folder-o"></i><span> 项目库</span></a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index3">
+                        <a href="javascript:;"><i class="fa fa-address-card" aria-hidden="true"></i><span> 人员库</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index31"><a href="javascript:;" kit-target data-options="{url:'card/card-index.html',icon:'fa-address-card',title:'人员库（名片）',id:'31'}"><i class="fa fa-address-card"></i><span> 人员库（名片）</span></a></dd>
+                            <dd class="index32"><a href="javascript:;" kit-target data-options="{url:'guest.html',icon:'fa-address-card',title:'专家库',id:'32'}"><i class="fa fa-address-card"></i><span> 专家库</span></a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index4">
+                        <a href="javascript:;"><i class="fa fa-address-card" aria-hidden="true"></i><span> 咨询项目库(内部)</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index41"><a href="javascript:;" kit-target data-options="{url:'data-consultPro.html',icon:'fa-address-card',title:'咨询项目库',id:'41'}"><i class="fa fa-address-card"></i><span>咨询项目库</span></a></dd>
+                        </dl>
+                        <dl class="layui-nav-child">
+                            <dd class="index42"><a href="javascript:;" kit-target data-options="{url:'consult.html',icon:'fa-address-card',title:'财务回款',id:'42'}"><i class="fa fa-address-card"></i><span>财务回款</span></a></dd>
+                        </dl>
+                        
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index5">
+                        <a href="javascript:;"><i class="fa fa-book" aria-hidden="true"></i><span> 新学说课堂</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index51"><a href="javascript:;" kit-target data-options="{url:'class-index.html',icon:'fa-list-alt',title:'课程概览',id:'51'}"><i class="fa fa-list-alt"></i><span> 课程概览 </span></a></dd>
+                            <dd class="index52"><a href="javascript:;" kit-target data-options="{url:'class-settings.html',icon:'fa-cog',title:'直播配置&用户信息',id:'52'}"><i class="fa fa-cog"></i><span> 直播配置&用户信息 </span></a></dd>
+                            <dd class="index53"><a href="javascript:;" kit-target data-options="{url:'class-teacher.html',icon:'fa-address-book-o',title:'发布教师信息',id:'53'}"><i class="fa fa-address-book-o"></i><span> 发布教师信息 </span></a></dd>
+                            <dd class="index54"><a href="javascript:;" kit-target data-options="{url:'class-course.html',icon:'fa-pencil-square',title:'发布课程基本信息',id:'54'}"><i class="fa fa-pencil-square"></i><span> 发布课程基本信息 </span></a></dd>
+                            <dd class="index55"><a href="javascript:;" kit-target data-options="{url:'class-detail.html',icon:'fa-file-text-o',title:'发布课程详细信息',id:'55'}"><i class="fa fa-file-text-o"></i><span> 发布课程详细信息 </span></a></dd>
+                            <dd class="index56"><a href="javascript:;" kit-target data-options="{url:'class-job.html',icon:'fa-file-text-o',title:'作业管理',id:'56'}"><i class="fa fa-file-text-o"></i><span> 作业管理 </span></a></dd>
+                            <dd class="index57"><a href="javascript:;" kit-target data-options="{url:'class-comment.html',icon:'fa-file-text-o',title:'评论管理',id:'57'}"><i class="fa fa-file-text-o"></i><span> 评论管理 </span></a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index8">
+                        <a href="javascript:;"><i class="fa fa-book" aria-hidden="true"></i><span> 新学说课堂(录播)</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index81"><a href="javascript:;" kit-target data-options="{url:'classRecord.html',icon:'fa-list-alt',title:'课程管理',id:'81'}"><i class="fa fa-list-alt"></i><span> 课程管理</span></a></dd>
+                            <dd class="index82"><a href="javascript:;" kit-target data-options="{url:'classRecordSon.html',icon:'fa-list-alt',title:'子课程管理',id:'82'}"><i class="fa fa-list-alt"></i><span>子课程管理</span></a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index6">
+                        <a href="javascript:;"><i class="fa fa-book" aria-hidden="true"></i><span>签到</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index61"><a href="javascript:;" kit-target data-options="{url:'./signin/index.html',icon:'fa-list-alt',title:'签到管理',id:'61'}"><i class="fa fa-list-alt"></i><span> 签到管理 </span></a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed index7">
+                        <a href="javascript:;"><i class="fa fa-book" aria-hidden="true"></i><span>其他</span></a>
+                        <dl class="layui-nav-child">
+                            <dd class="index71"><a href="javascript:;" kit-target data-options="{url:'./log.html',icon:'fa-list-alt',title:'服务器log',id:'71'}"><i class="fa fa-list-alt"></i><span> 服务器log </span></a></dd>
+                        </dl>
+                        <dl class="layui-nav-child">
+                            <dd class="index72"><a href="javascript:;" kit-target data-options="{url:'./role/index.html',icon:'fa-list-alt',title:'权限管理',id:'72'}"><i class="fa fa-list-alt"></i><span> 权限管理 </span></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body" id="container">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63e;</i> 请稍等...</div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            2017-2018 &copy;
+            <a href="http://data.xinxuehsuo.cn">http://data.xinxuehsuo.cn/</a> NSI License
+        </div>
+    </div>
+
+    <div class="site-tree-mobile" id="kitSideShow"><i class="layui-icon" style="font-size: 35px;"></i></div>
+
+    <script src="./plugins/layui/layui.js"></script>
+    <script src="./plugins/jq/jquery.min.js"></script>
+    <script src="./plugins/jq/jquery.cookie.js"></script>
+    <script src="./src/js/config.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: 'src/js/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+            $('#pay').on('click', function() {
+                layer.open({
+                    title: false,
+                    type: 1,
+                    content: '<img src="/src/images/pay.png" />',
+                    area: ['500px', '250px'],
+                    shadeClose: true
+                });
+            });
+            $('dl.skin > dd').on('click', function() {
+                var $that = $(this);
+                var skin = $that.children('a').data('skin');
+                switchSkin(skin);
+            });
+            var setSkin = function(value) {
+                    layui.data('kit_skin', {
+                        key: 'skin',
+                        value: value
+                    });
+                },
+                getSkinName = function() {
+                    return layui.data('kit_skin').skin;
+                },
+                switchSkin = function(value) {
+                    var _target = $('link[kit-skin]')[0];
+                    _target.href = _target.href.substring(0, _target.href.lastIndexOf('/') + 1) + value + _target.href.substring(_target.href.lastIndexOf('.'));
+                    setSkin(value);
+                },
+                initSkin = function() {
+                    var skin = getSkinName();
+                    switchSkin(skin === undefined ? 'default' : skin);
+                }();
+        });
+    </script>
+
+    <script src="./src/js/index.js?v=1.0.1"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>咨询项目库查看</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./src/css/lib/cropper.min.css?v=65d004a665">
+    <style>
+        .layui-form-item .layui-input-inline {  width: 400px;margin-left: 15px; }
+        .layui-form-label{ width:120px;  }
+        .fl{float: left;}
+        .clearfix:after{content: "";display: block;clear: both;}
+    </style>
+</head>
+<body>
+<body style="margin-left:15px;margin-right: 15px;">
+<blockquote class="layui-elem-quote" style="margin-top: 20px;">您正在查看咨询项目库信息</blockquote>
+<input type="text" id="parent_PeopleId" class="layui-hide">
+<form class="layui-form" style="margin-top: 20px;"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">项目名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" disabled name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="name">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*项目名称不能为空</div>
+    </div>
+    <div class="layui-form-item">
+            <label class="layui-form-label">项目状态：</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="sex" value="0" title="前期沟通中">
+                <input type="radio" name="sex" value="1" title="项目进行中">
+                <input type="radio" name="sex" value="2" title="已结束" checked>
+            </div>
+        </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">项目负责人:</label>
+        <div class="layui-input-inline">
+            <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="principal">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*项目负责人不能为空</div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">客户单位:</label>
+        <div class="layui-input-inline">
+                <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="customerUnit">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*客户单位不能为空</div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">客户姓名:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="customerName">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">客户电话:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="customerPhone">
+        </div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">客户所在地:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="customerLocaltion">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">客户对接人:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="customerPrincipal">
+        </div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">预计结款时间:</label>
+        <div class="layui-input-inline">
+                <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="estimatedTime">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">项目结束时间:</label>
+        <div class="layui-input-inline">
+                <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="endTime">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">项目可行性:</label>
+        <div class="layui-input-inline">
+                <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="possibility">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*百分比格式，例如：50%</div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">实际金额:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="actualAmount">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">项目简介:</label>
+            <div class="layui-input-inline">
+                <textarea disabled placeholder="" class="layui-textarea"  lay-verify="required"  id="projectBrief"></textarea>
+            </div>
+        </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">回访人:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="visitPeople">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">回访时间:</label>
+        <div class="layui-input-inline">
+             <input disabled type="text" name="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="visitTime">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">回访结果:</label>
+        <div class="layui-input-inline">
+            <textarea disabled placeholder="" class="layui-textarea"  lay-verify="required"  id="interviewResults"></textarea>
+        </div>
+    </div>
+
+    <!--墨绿分割线-->
+    <div class="fujianattr" data="" style="display:none;"></div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./plugins/lib/cropper.min.js"></script>
+
+<script src="./plugins/edit/wangEditor.js"></script>
+
+<script src="src/js/consultPro/data-infor.js"></script>
+<script>
+</script>
+</body>
+</body>
+</html>

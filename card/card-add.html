@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员库-新增</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all">
+    <style>
+        .layui-form-item .layui-input-inline {  width: 400px;margin-left: 15px; }
+        .layui-form-label{ width:120px;}
+        .MB5 input{margin-bottom: 5px;}
+    </style>
+</head>
+<body  style="margin-left:15px;margin-right: 15px;">
+<blockquote class="layui-elem-quote" style="margin-top: 20px;">您正在录入人员信息</blockquote>
+
+<form class="layui-form" style="margin-top: 20px;" autocomplete="on"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder="" lay-verify="required" autocomplete="on" class="layui-input" id="People_name">
+        </div>
+        <div class="layui-form-mid layui-word-aux People_nameStr"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">会员类型：</label>
+        <div class="layui-input-inline">
+            <select name="People_member" lay-filter="People_member" id="People_member">
+                <option value="非会员">非会员</option>
+                <option value="注册会员">注册会员</option>
+                <option value="个人会员">个人会员</option>
+                <option value="企业普通会员">企业普通会员</option>
+                <option value="企业高级会员">企业高级会员</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">会员到期时间：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" id="People_dueTime" autocomplete="on" class="layui-input" >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">标签：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder=""  autocomplete="on" class="layui-input" id="peopleTag">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"> </label>
+        <div class="layui-input-inline my-inline MB5" style="width: 420px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 0px;" onclick="javascript:Insert('校长班;','peopleTag')" value="校长班" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('在线课堂;','peopleTag')" value="在线课堂" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('咨询客户;','peopleTag')" value="咨询客户" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('赞助商;','peopleTag')" value="赞助商" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">工作单位：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder=""  autocomplete="on" class="layui-input" id="People_work">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职位：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder=""  autocomplete="on" class="layui-input" id="People_position">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"> </label>
+        <div class="layui-input-inline my-inline MB5" style="width: 420px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 0px;" onclick="javascript:Insert('校长;','People_position')" value="校长" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('副校长;','People_position')" value="副校长" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('招生总监;','People_position')" value="招生总监" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('助理;','People_position')" value="助理" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 0px;" onclick="javascript:Insert('投资人;','People_position')" value="投资人" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('运营;','People_position')" value="运营" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder=""  autocomplete="on" class="layui-input" id="People_phone">
+        </div>
+        <div class="layui-form-mid layui-word-aux People_phoneStr"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">邮箱：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" placeholder=""  autocomplete="on" class="layui-input" id="People_mail">
+        </div>
+        <div class="layui-form-mid layui-word-aux People_mailStr"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">座机：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="date" placeholder=""  autocomplete="on" class="layui-input" id="People_telephone">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">微信：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder="" autocomplete="on"  class="layui-input" id="People_wechat">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">通讯地址：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="People_address" value="" placeholder="" autocomplete="on"  class="layui-input" id="People_address">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介：</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="" class="layui-textarea"   id="People_introduction"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注：</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="" class="layui-textarea"   id="People_remark"></textarea>
+        </div>
+    </div>
+
+
+
+    <!--墨绿分割线-->
+    <hr class="layui-bg-green" style="margin-top: 40px;margin-bottom: 20px;">
+
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align: center;">
+            <button class="layui-btn" lay-submit lay-filter="card-submit">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+
+    <script src="../plugins/layui/layui.js"></script>
+    <script src="../plugins/jq/jquery.min.js"></script>
+    <script src="../plugins/jq/jquery.cookie.js"></script>
+    <script src="../src/js/config.js"></script>
+    <script src="../src/js/card/card-add.js"></script>
+</form>
+</body>
+</html>

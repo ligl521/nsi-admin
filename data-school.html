@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取数据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        *{font-size: 14px;}
+        .text-center{text-align: center;}
+        /*.layui-form-item .layui-input-inline {*/
+            /*float: left;*/
+            /*width: 360px;*/
+            /*margin-right: 10px;*/
+        /*}*/
+        .layui-form-item .my-inline{
+            float: left;
+            width: 390px;
+            margin-right: 10px;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 160px;
+            font-weight: 400;
+            text-align: right;
+        }
+        .my-lable{width: 80px;}
+        .MB5 input{margin-bottom: 5px;}
+        .tofix{position: fixed;top:0px;}
+    </style>
+</head>
+<body style="margin-left: 15px;margin-right: 15px;">
+
+<!--新增数据-->
+<form class="layui-form"  id="layerForm" style="display:none;padding:15px;">
+    <p style="color: #999;padding: 10px 0;">注意：带 <i class="layui-icon">&#xe658;</i>标记的为必填项</p>
+    <blockquote class="layui-elem-quote">基本信息</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 学校中文名</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="School_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input"  id="School_name">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*学校名不能为空</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学校英文名</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="School_EnglishName"  placeholder="" autocomplete="off" class="layui-input" id="School_EnglishName">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学校性质</label>
+        <div class="layui-input-inline">
+            <select name="School_properties" lay-filter="School_properties" id="School_properties">
+                <option value="公办" >公办</option>
+                <option value="民办" selected="">民办</option>
+                <option value="外籍">外籍</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 所在地区</label>
+        <div class="layui-input-inline">
+            <select  id="selProvince" lay-filter="myselect01" class="layui-form">
+                <!--<option value="">请选择省</option>-->
+                <!--<option value="浙江" selected="">浙江省</option>-->
+                <!--<option value="你的工号">江西省</option>-->
+                <!--<option value="你最喜欢的老师">福建省</option>-->
+            </select>
+        </div>
+        <div class="layui-input-inline"  >
+            <select  id="selCity" lay-filter="myselect02" class="layui-form">
+                <!--<option value="">请选择市</option>-->
+                <!--<option value="杭州">杭州</option>-->
+                <!--<option value="宁波" disabled="">宁波</option>-->
+                <!--<option value="温州">温州</option>-->
+                <!--<option value="温州">台州</option>-->
+                <!--<option value="温州">绍兴</option>-->
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Areas03" lay-verify="required" placeholder="详细地址：xxx大街xx号"   autocomplete="off"  class="layui-input" id="Areas03">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">建校时间</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Founded_time" lay-verify="foundTime"  autocomplete="off" placeholder="" class="layui-input" id="Founded_time">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*请输入四位整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">运营状态</label>
+        <div class="layui-input-inline">
+            <select name="interest" lay-filter="OperationState" id="OperationState">
+                <option value="运营中" selected="">运营中</option>
+                <option value="停办" >停办</option>
+                <option value="筹建">筹建</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学制</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="School_system" lay-verify="required"  autocomplete="off" placeholder="" class="layui-input" id="School_system" >
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('幼儿园；','School_system') " value="幼儿园" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('小学；','School_system') " value="小学" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('初中；','School_system') " value="初中" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;" onclick="Insert('高中；','School_system') " value="高中" />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-row">
+            <label class=" layui-form-label">学费/年</label>
+            <div class="layui-col-md10 layui-col-sm10 layui-col-xs10" style="width: 700px;">
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">幼儿园</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="Tuition01" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition01">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">小学</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Tuition02" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition02">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">初中</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="Tuition03" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition03">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">高中</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Tuition04" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition04">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">官网</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Website"  placeholder="" autocomplete="off" class="layui-input" id="Website">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电话</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Telephone"  placeholder="" autocomplete="off" class="layui-input" id="Telephone">
+        </div>
+    </div>
+    <!--课程信息-->
+    <blockquote class="layui-elem-quote">课程信息</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">国际课程认证时间</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Inter_Course_Founded_time"  placeholder="" lay-verify="foundTime" autocomplete="off" class="layui-input" id="Inter_Course_Founded_time">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*请输入四位整数</div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 国际课程</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Course"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="Course">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','Course')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IMYC；','Course')" value="IMYC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('PGA；','Course')" value="PGA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP；','Course')" value="AP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBPYP；','Course')" value="IBPYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBMYP；','Course')" value="IBMYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP；','Course')" value="IBDP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-LEVEL；','Course')" value="A-LEVEL" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IGCSE；','Course')" value="IGCSE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('蒙特梭利；','Course')" value="蒙特梭利" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('美国课程；','Course')" value="美国课程" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳大利亚课程；','Course')" value="澳大利亚课程" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲VCE；','Course')" value="澳洲VCE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲QCE；','Course')" value="澳洲QCE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲WACE；','Course')" value="澳洲WACE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('加拿大课程；','Course')" value="加拿大课程" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('双语课程；','Course')" value="双语课程" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('校本课程；','Course')" value="校本课程" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ESL；','Course')" value="ESL" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('其他；','Course')" value="其他" />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"> 认证&组织</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Authentication"  placeholder="" autocomplete="off" class="layui-input" id="Authentication">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('CIE；','Authentication')" value="CIE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('Edexcel；','Authentication')" value="Edexcel" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('OxfordAQA;','Authentication')" value="OxfordAQA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBO；','Authentication')" value="IBO" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CollegeBoard；','Authentication')" value="CollegeBoard" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CIS；','Authentication')" value="CIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WASC；','Authentication')" value="WASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NEASC；','Authentication')" value="NEASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('EARCOS；','Authentication')" value="EARCOS" />
+
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvancED；','Authentication')" value="AdvancED" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NCCT；','Authentication')" value="NCCT" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ACAMIS；','Authentication')" value="ACAMIS" />
+
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ROUND SQUARE；','Authentication')" value="ROUND SQUARE" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('FOBISIA；','Authentication')" value="FOBISIA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ISAC；','Authentication')" value="ISAC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('THE DUKE OF EDINBURGH’S INTERNATIONAL AWARD；','Authentication')" value="THE DUKE OF EDINBURGH'S INTERNATIONAL AWARD" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"> 外部考试与评估</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Course_evaluation"  placeholder="" autocomplete="off" class="layui-input" id="Course_evaluation">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"> </label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('WIDA;','Course_evaluation')" value="WIDA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('MAP;','Course_evaluation')" value="MAP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WRAP;','Course_evaluation')" value="WRAP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ISA;','Course_evaluation')" value="ISA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('SAT;','Course_evaluation')" value="SAT" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP;','Course_evaluation')" value="AP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP;','Course_evaluation')" value="IBDP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level;','Course_evaluation')" value="A-Level" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IGCSE;','Course_evaluation')" value="IGCSE" />
+        </div>
+    </div>
+    <!--学生信息-->
+    <blockquote class="layui-elem-quote">课程信息</blockquote>
+    <div class="layui-form-item">
+        <div class="layui-row">
+            <label class=" layui-form-label">年段学生数（国际部）</label>
+            <div class="layui-col-md10 layui-col-sm10 layui-col-xs10" style="width: 700px;">
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">幼儿园</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="Student_Num01" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num01">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">小学</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Student_Num02" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num02">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">初中</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="Student_Num03" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num03">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label my-lable">高中</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Student_Num04" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num04">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">在校生总人数（国际部）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Student_Num_All"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num_All">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总容量（国际部）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Student_Capacity"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Capacity">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">毕业班人数（国际部）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Graduated_Stu_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Graduated_Stu_Num">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">学生主要国籍</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Stu_Dominant_nationality"  placeholder=""  autocomplete="off" class="layui-input" id="Stu_Dominant_nationality">
+        </div>
+        <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">生均年投入</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Stu_Year_Investment"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Stu_Year_Investment">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">俱乐部数量</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Club_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Club_Num">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+
+    <!--师资力量-->
+    <blockquote class="layui-elem-quote">师资力量</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label">校长/国际部主任国籍</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="President_Country"  placeholder=""  autocomplete="off" class="layui-input" id="President_Country">
+        </div>
+        <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总员工数量</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Staff_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Staff_Num">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总教师数量</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Teacher_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Teacher_Num">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">外籍教师数量</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Foreign_Teacher_num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Foreign_Teacher_num">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">师均年培训投入</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Teacher_Year_Investment"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Teacher_Year_Investment">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">教师流失率</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Teacher_Retention"  placeholder=""  autocomplete="off" class="layui-input" id="Teacher_Retention">
+        </div>
+        <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">教师薪酬（三年经验）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Teacher_Salary"  placeholder=""  autocomplete="off" class="layui-input" id="Teacher_Salary">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">师生比</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Teacher_Stu_ratio"  placeholder="" autocomplete="off" class="layui-input" id="Teacher_Stu_ratio">
+        </div>
+        <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+    </div>
+
+    <!--基建&投资-->
+    <blockquote class="layui-elem-quote">师资力量</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label">占地面积（亩）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Covered_Area"  placeholder="" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Covered_Area">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为数字</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">建筑面积（平方米）</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="Built_Area"  placeholder="" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Built_Area">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*需要为数字</div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">硬件设施</label>
+        <div class="layui-input-inline" style="width: 50%;">
+            <textarea placeholder="请少于200字" class="layui-textarea" name="Hardware" id="Hardware"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">投资信息</label>
+        <div class="layui-input-inline" style="width: 50%;">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="Investment" id="Investment"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-inline" style="width: 50%;">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="Remark" id="Remark"></textarea>
+        </div>
+    </div>
+    <!-- 资格认证 -->
+    <blockquote class="layui-elem-quote">资格认证</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 主流学术保障认证机构</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="certificate_authority"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="certificate_authority">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','certificate_authority')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CIS；','certificate_authority')" value="CIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NEASC；','certificate_authority')" value="NEASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WASC；','certificate_authority')" value="WASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('COBIS；','certificate_authority')" value="COBIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ECIS；','certificate_authority')" value="ECIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvandED；','certificate_authority')" value="AdvandED" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 学生评测</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="student_evaluation"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="student_evaluation">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('ISA；','student_evaluation')" value="ISA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WIDA；','student_evaluation')" value="WIDA" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 第三方组织机构</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="third_organizations"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="third_organizations">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('ACAMIS；','third_organizations')" value="ACAMIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('EARCOS；','third_organizations')" value="EARCOS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('FOBISIA；','third_organizations')" value="FOBISIA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('圆方；','third_organizations')" value="圆方" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 课程认证</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="course_authority"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="course_authority">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','course_authority')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBPYP；','course_authority')" value="IBPYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBMYP；','course_authority')" value="IBMYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP；','course_authority')" value="IBDP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP；','course_authority')" value="AP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(剑桥)；','course_authority')" value="A-Level(剑桥)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(爱德思)；','course_authority')" value="A-Level(爱德思)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(牛津AQA)','course_authority')" value="A-Level(牛津AQA)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('加拿大；','course_authority')" value="加拿大" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲；','course_authority')" value="澳洲" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IPC；','course_authority')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('其他；','course_authority')" value="其他" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvandED；','course_authority')" value="AdvandED" />
+        </div>
+    </div>
+    <!--墨绿分割线-->
+    <hr class="layui-bg-green" style="margin-top: 40px;margin-bottom: 20px;">
+
+    <div class="layui-form-item text-center" >
+        <div class="layui-input-block" style="margin-left: 0;">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    
+</form>
+
+
+<!--数据修改-->
+<div id="formEdit" style="display:none;padding:15px;">
+
+    <form class="layui-form" >
+        <p style="color: #999;;padding-bottom: 15px;">注意：带 <i class="layui-icon">&#xe658;</i>标记的为必填项</p>
+        <blockquote class="layui-elem-quote">基本信息</blockquote>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 学校中文名</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="School_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input"  id="School_name-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*学校名不能为空</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">学校英文名</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="School_EnglishName"  placeholder="" autocomplete="off" class="layui-input" id="School_EnglishName-edit">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">学校性质</label>
+            <div class="layui-input-inline">
+                <select name="School_properties-edit" lay-filter="School_properties-edit" class="layui-form" id="School_properties-edit">
+                    <option value="公办" >公办</option>
+                    <option value="民办" >民办</option>
+                    <option value="外籍">外籍</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 所在地区</label>
+            <div class="layui-input-inline">
+                <select  id="selProvince-edit"  lay-filter="myselect-edit">
+                    <!--<option value="">请选择省</option>-->
+                    <!--<option value="浙江" selected="">浙江省</option>-->
+                    <!--<option value="你的工号">江西省</option>-->
+                    <!--<option value="你最喜欢的老师">福建省</option>-->
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select  id="selCity-edit" >
+                    <!--<option value="">请选择市</option>-->
+                    <!--<option value="杭州">杭州</option>-->
+                    <!--<option value="宁波" disabled="">宁波</option>-->
+                    <!--<option value="温州">温州</option>-->
+                    <!--<option value="温州">台州</option>-->
+                    <!--<option value="温州">绍兴</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Areas03" lay-verify="required" placeholder="详细地址：xxx大街xx号"   autocomplete="off"  class="layui-input" id="Areas03-edit">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">建校时间</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Founded_time" lay-verify="foundTime"  autocomplete="off" placeholder="" class="layui-input" id="Founded_time-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*请输入四位整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">运营状态</label>
+            <div class="layui-input-inline">
+                <select name="OperationState-edit" lay-filter="OperationState-edit" class="layui-form" id="OperationState-edit">
+                    <option value="运营中">运营中</option>
+                    <option value="停办">停办</option>
+                    <option value="筹建">筹建</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">学制</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="School_system" lay-verify="required"  autocomplete="off" placeholder="" class="layui-input" id="School_system-edit" >
+            </div>
+            <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline my-inline">
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('幼儿园；','School_system-edit') " value="幼儿园" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('小学；','School_system-edit') " value="小学" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('初中；','School_system-edit') " value="初中" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;" onclick="Insert('高中；','School_system-edit') " value="高中" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <label class=" layui-form-label">学费/年</label>
+                <div class="layui-col-md10 layui-col-sm10 layui-col-xs10" style="width: 700px;">
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">幼儿园</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="Tuition01" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition01-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">小学</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Tuition02" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition02-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">初中</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="Tuition03" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition03-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">高中</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Tuition04" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Tuition04-edit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">官网</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Website"  placeholder="" autocomplete="off" class="layui-input" id="Website-edit">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Telephone"  placeholder="" autocomplete="off" class="layui-input" id="Telephone-edit">
+            </div>
+        </div>
+        <!--课程信息-->
+        <blockquote class="layui-elem-quote">课程信息</blockquote>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">国际课程认证时间</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Inter_Course_Founded_time"  placeholder="" lay-verify="foundTime" autocomplete="off" class="layui-input" id="Inter_Course_Founded_time-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*请输入四位整数</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 国际课程</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Course"  placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="Course-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','Course-edit')" value="IPC" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IMYC；','Course-edit')" value="IMYC" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('PGA；','Course-edit')" value="PGA" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP；','Course-edit')" value="AP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBPYP；','Course-edit')" value="IBPYP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBMYP；','Course-edit')" value="IBMYP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP；','Course-edit')" value="IBDP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-LEVEL；','Course-edit')" value="A-LEVEL" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IGCSE；','Course-edit')" value="IGCSE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('蒙特梭利；','Course-edit')" value="蒙特梭利" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('美国课程；','Course-edit')" value="美国课程" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳大利亚课程；','Course-edit')" value="澳大利亚课程" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲VCE；','Course-edit')" value="澳洲VCE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲QCE；','Course-edit')" value="澳洲QCE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲WACE；','Course-edit')" value="澳洲WACE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('加拿大课程；','Course-edit')" value="加拿大课程" />
+                 <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('双语课程；','Course')" value="双语课程" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('校本课程；','Course')" value="校本课程" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ESL；','Course')" value="ESL" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('其他；','Course-edit')" value="其他" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 认证&组织</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Authentication"  placeholder="" autocomplete="off" class="layui-input" id="Authentication-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('CIE；','Authentication-edit')" value="CIE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('Edexcel；','Authentication-edit')" value="Edexcel" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('OxfordAQA;','Authentication-edit')" value="OxfordAQA" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBO；','Authentication-edit')" value="IBO" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CollegeBoard；','Authentication-edit')" value="CollegeBoard" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CIS；','Authentication-edit')" value="CIS" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WASC；','Authentication-edit')" value="WASC" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NEASC；','Authentication-edit')" value="NEASC" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('EARCOS；','Authentication-edit')" value="EARCOS" />
+
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvancED；','Authentication-edit')" value="AdvancED" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NCCT；','Authentication-edit')" value="NCCT" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ACAMIS；','Authentication-edit')" value="ACAMIS" />
+
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ROUND SQUARE；','Authentication-edit')" value="ROUND SQUARE" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('FOBISIA；','Authentication-edit')" value="FOBISIA" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ISAC；','Authentication-edit')" value="ISAC" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('THE DUKE OF EDINBURGH’S INTERNATIONAL AWARD；','Authentication-edit')" value="THE DUKE OF EDINBURGH'S INTERNATIONAL AWARD" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 外部考试与评估</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Course_evaluation"  placeholder="" autocomplete="off" class="layui-input" id="Course_evaluation-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"> </label>
+            <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('WIDA;','Course_evaluation-edit')" value="WIDA" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('MAP;','Course_evaluation-edit')" value="MAP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WRAP;','Course_evaluation-edit')" value="WRAP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ISA;','Course_evaluation-edit')" value="ISA" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('SAT;','Course_evaluation-edit')" value="SAT" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP;','Course_evaluation-edit')" value="AP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP;','Course_evaluation-edit')" value="IBDP" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level;','Course_evaluation-edit')" value="A-Level" />
+                <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IGCSE;','Course_evaluation-edit')" value="IGCSE" />
+            </div>
+        </div>
+        <!--学生信息-->
+        <blockquote class="layui-elem-quote">课程信息</blockquote>
+        <div class="layui-form-item">
+            <div class="layui-row">
+                <label class=" layui-form-label">年段学生数（国际部）</label>
+                <div class="layui-col-md10 layui-col-sm10 layui-col-xs10" style="width: 700px;">
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">幼儿园</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="Student_Num01" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num01-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">小学</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Student_Num02" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num02-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">初中</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="Student_Num03" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num03-edit">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label my-lable">高中</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Student_Num04" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num04-edit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">在校生总人数（国际部）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Student_Num_All"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Num_All-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">总容量（国际部）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Student_Capacity"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Student_Capacity-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">毕业班人数（国际部）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Graduated_Stu_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Graduated_Stu_Num-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">学生主要国籍</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Stu_Dominant_nationality"  placeholder=""  autocomplete="off" class="layui-input" id="Stu_Dominant_nationality-edit">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">生均年投入</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Stu_Year_Investment"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Stu_Year_Investment-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">俱乐部数量</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Club_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Club_Num-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+
+        <!--师资力量-->
+        <blockquote class="layui-elem-quote">师资力量</blockquote>
+        <div class="layui-form-item">
+            <label class="layui-form-label">校长/国际部主任国籍</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="President_Country"  placeholder=""  autocomplete="off" class="layui-input" id="President_Country-edit">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">总员工数量</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Staff_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Staff_Num-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">总教师数量</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Teacher_Num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Teacher_Num-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">外籍教师数量</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Foreign_Teacher_num"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Foreign_Teacher_num-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">师均年培训投入</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Teacher_Year_Investment"  placeholder="" lay-verify="checkInt" autocomplete="off" class="layui-input" id="Teacher_Year_Investment-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教师流失率</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Teacher_Retention"  placeholder=""  autocomplete="off" class="layui-input" id="Teacher_Retention-edit">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">教师薪酬（三年经验）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Teacher_Salary"  placeholder=""  autocomplete="off" class="layui-input" id="Teacher_Salary-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为整数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">师生比</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Teacher_Stu_ratio"  placeholder="" autocomplete="off" class="layui-input" id="Teacher_Stu_ratio-edit">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">*需要为整数</div>-->
+        </div>
+
+        <!--基建&投资-->
+        <blockquote class="layui-elem-quote">师资力量</blockquote>
+        <div class="layui-form-item">
+            <label class="layui-form-label">占地面积（亩）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Covered_Area"  placeholder="" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Covered_Area-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为数字</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">建筑面积（平方米）</label>
+            <div class="layui-input-inline my-inline">
+                <input type="text" name="Built_Area"  placeholder="" lay-verify="checkFloat" autocomplete="off" class="layui-input" id="Built_Area-edit">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*需要为数字</div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">硬件设施</label>
+            <div class="layui-input-inline" style="width: 50%;">
+                <textarea placeholder="请少于200字" class="layui-textarea" name="Hardware" id="Hardware-edit"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">投资信息</label>
+            <div class="layui-input-inline" style="width: 50%;">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="Investment" id="Investment-edit"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline" style="width: 50%;">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="Remark" id="Remark-edit"></textarea>
+            </div>
+        </div>
+        <!-- 资格认证 -->
+    <blockquote class="layui-elem-quote">资格认证</blockquote>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 主流学术保障认证机构</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="certificate_authority"  placeholder="" autocomplete="off" class="layui-input" id="certificate_authority-edit">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','certificate_authority-edit')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('CIS；','certificate_authority-edit')" value="CIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('NEASC；','certificate_authority-edit')" value="NEASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WASC；','certificate_authority-edit')" value="WASC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('COBIS；','certificate_authority-edit')" value="COBIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('ECIS；','certificate_authority-edit')" value="ECIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvandED；','certificate_authority-edit')" value="AdvandED" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 学生评测</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="student_evaluation"  placeholder="" autocomplete="off" class="layui-input" id="student_evaluation-edit">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('ISA；','student_evaluation-edit')" value="ISA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('WIDA；','student_evaluation-edit')" value="WIDA" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 第三方组织机构</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="third_organizations"  placeholder="" autocomplete="off" class="layui-input" id="third_organizations-edit">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('ACAMIS；','third_organizations-edit')" value="ACAMIS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('EARCOS；','third_organizations-edit')" value="EARCOS" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('FOBISIA；','third_organizations-edit')" value="FOBISIA" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('圆方；','third_organizations-edit')" value="圆方" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon">&#xe658;</i> 课程认证</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="course_authority"  placeholder="" autocomplete="off" class="layui-input" id="course_authority-edit">
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline MB5" style="width: 600px;">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;margin-left: 10px;" onclick="javascript:Insert('IPC；','course_authority-edit')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBPYP；','course_authority-edit')" value="IBPYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBMYP；','course_authority-edit')" value="IBMYP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IBDP；','course_authority-edit')" value="IBDP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AP；','course_authority-edit')" value="AP" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(剑桥)；','course_authority-edit')" value="A-Level(剑桥)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(爱德思)；','course_authority-edit')" value="A-Level(爱德思)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('A-Level(牛津AQA)','course_authority-edit')" value="A-Level(牛津AQA)" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('加拿大；','course_authority-edit')" value="加拿大" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('澳洲；','course_authority-edit')" value="澳洲" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('IPC；','course_authority-edit')" value="IPC" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('其他；','course_authority-edit')" value="其他" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="javascript:Insert('AdvandED；','course_authority-edit')" value="AdvandED" />
+        </div>
+    </div>
+    <div style="padding-left:30px;">
+        <img src="" width="80px;" height="80px" id="uploadSchoolLogoImgSrc" alt="">
+        <button type="button" class="layui-btn" id="uploadSchoolLogoImg">
+          <i class="layui-icon">&#xe67c;</i>上传学校logo图片
+        </button>
+        
+        <button type="button" class="layui-btn" id="uploadSchoolShowImg">
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button>
+    </div>
+        <!--墨绿分割线-->
+        <hr class="layui-bg-green" style="margin-top: 40px;margin-bottom: 20px;">
+
+        <div class="layui-form-item text-center" >
+            <div class="layui-input-block" style="margin-left: 0;">
+                <button class="layui-btn" lay-submit lay-filter="school-revise">立即修改</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<!--数据操作-->
+<!--<div class="layui-btn-group demoTable">-->
+    <!--<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>-->
+    <!--<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>-->
+    <!--<button class="layui-btn" data-type="isAll">验证是否全选</button>-->
+<!--</div>-->
+
+<!--省份数据导出-->
+<div id="provinceAlertShow" style="text-align: center;display: none;">
+    <div class="layui-icon" style="font-size: 80px;color: #1E9FFF;margin: 10px 0;">&#xe629;</div>
+    <div class="layui-input-inline">
+        <input type="text" value="" placeholder="请输入省份" class="layui-input search_input" id="provinceChoose">
+    </div>
+    <a class="layui-btn layui-btn-normal" id="getProvinceData">确定</a>
+</div>
+
+<!--数据搜索-->
+<blockquote class="layui-elem-quote news_search demoTable" style="margin-top:20px;margin-bottom: 15px;">
+    <div class="layui-inline">
+        <div class="layui-form layui-input-inline" style="width: 120px;left:5px;">
+            <select name="schoolSearch" id="schoolSearch">
+                <option value="0">全局搜索</option>
+                <option value="1">省份搜索</option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+           <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input" id="schoolSearchValue">
+        </div>
+        <a class="layui-btn layui-btn-normal search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i> 查询</a>
+    </div>
+    <div class="layui-inline" id="addSchool">
+        <a class="layui-btn layui-btn-normal newsAdd_btn"><i class="layui-icon">&#xe61f;</i> 添加学校</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-normal recommend" style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">&#x1002;</i> 刷新</a>
+    </div>
+    <br/>
+    <span style="padding-left:16px;padding-right: 34px;">数据导出：</span>
+    <div class="layui-inline" style="margin-top: 5px;" id="provinceData">
+        <a class="layui-btn " ><i class="layui-icon">&#xe62d;</i>省份导出</a>
+    </div>
+    <div class="layui-inline demoTable" style="margin-top: 5px;">
+        <a class="layui-btn  " data-type="getCheckData"><i class="layui-icon">&#xe62d;</i> 批量导出</a>
+    </div>
+    <div class="layui-inline " id="uploadAllData" style="margin-top: 5px;">
+        <a class="layui-btn  " ><i class="layui-icon">&#xe601;</i> 导出全部</a>
+    </div>
+    <div class="layui-inline " id="shopCar" style="margin-top: 5px;">
+        <a class="layui-btn  " ><i class="layui-icon">&#xe657;</i> 购物车 <span class="layui-badge" id="shopNum">0</span> </a>
+    </div>
+    <div class="layui-inline">
+        <!--<a class="layui-btn layui-btn-danger batchDel"><i class="layui-icon">&#xe640;</i>批量删除</a>-->
+    </div>
+    <p style="display: inline-block;padding:5px 10px;color: red;">*注意：刷新页面后购物车将重置</p>
+</blockquote>
+
+<!--数据表格-->
+<table class="layui-table" lay-data="{ page:true,id:'idTest',height: 'full-150',limit: 30,limits:[10,20,30,40,50,60,70,80,90], where: {searchKey: '',type:0,verifyCode:'1'},url:'http://data.xinxueshuo.cn:80/nsi-1.0/manager/school/list.do',request: { pageName: 'pageNum' ,limitName: 'pageSize'}}" lay-filter="demo">
+    <thead class="tofix">
+    <tr>
+        <th lay-data="{type:'checkbox', fixed: 'left'}" rowspan="2"></th>
+        <th lay-data="{field:'schoolName',width:200, align:'center',fixed: true}"  rowspan="2">中文名</th>
+        <th lay-data="{field:'id', width:100, sort: true,align:'center'}" rowspan="2">ID</th>
+        <th lay-data="{field:'schoolEnglishname', width:200, align:'center'}"  rowspan="2">英文名</th>
+        <th lay-data="{align:'center'}" colspan="3">基本信息</th>
+        <th lay-data="{align:'center'}" colspan="3">课程&认证</th>
+        <th lay-data="{align:'center'}" colspan="3">地址</th>
+        <th lay-data="{align:'center'}" colspan="2">时间</th>
+        <th lay-data="{align:'center'}" colspan="4">学费</th>
+        <th lay-data="{align:'center'}" colspan="7">学生数</th>
+        <th lay-data="{align:'center'}" colspan="5">师资（人数）</th>
+        <th lay-data="{align:'center'}" colspan="2">国籍</th>
+        <th lay-data="{align:'center'}" colspan="3">投入/年</th>
+        <th lay-data="{align:'center'}" colspan="5">基建&投资</th>
+        <th lay-data="{align:'center'}" colspan="2">联系方式</th>
+        <th lay-data="{align:'center'}" colspan="4">资格认证</th>
+
+        <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}" rowspan="2">操作</th>
+    </tr>
+    <tr>
+
+
+        <th lay-data="{field:'schoolProperties', width:100,sort:true,align:'center'}" >类型</th>
+        <th lay-data="{field:'operationstate', width:120,sort:true,align:'center'}" >运营状态</th>
+        <th lay-data="{field:'schoolSystem', width:145, sort: true,align:'center'}" >学制</th>
+
+        <th lay-data="{field:'course', width:140, sort: true,align:'center'}" >国际课程</th>
+        <th lay-data="{field:'courseEvaluation', width:160, sort: true,align:'center'}" >外部考试与评估</th>
+        <th lay-data="{field:'authentication', width:120, sort: true,align:'center'}" >认证</th>
+
+        <th lay-data="{field:'areas', sort: true,width:100,align:'center'}">省</th>
+        <th lay-data="{field:'areas02', width:100,align:'center'}">市</th>
+        <th lay-data="{field:'areas03', width:300,align:'center'}">详细地址</th>
+
+        <th lay-data="{field:'foundedTime', width:120, sort: true,align:'center'}" >建校</th>
+        <th lay-data="{field:'interCourseFoundedTime', width:140, sort: true,align:'center'}" >国际课程认证</th>
+
+        <th lay-data="{field:'tuition01', width:100, sort: true, align:'center'}" >幼儿园</th>
+        <th lay-data="{field:'tuition02', width:100, sort: true,align:'center'}" >小学</th>
+        <th lay-data="{field:'tuition03', width:100, sort: true, align:'center'}" >初中</th>
+        <th lay-data="{field:'tuition04', width:100, sort: true, align:'center'}" >高中</th>
+
+        <th lay-data="{field:'studentNum01', width:100, sort: true, salign:'center'}" >幼儿园</th>
+        <th lay-data="{field:'studentNum02', width:100, sort: true, align:'center'}" >小学</th>
+        <th lay-data="{field:'studentNum03', width:100, sort: true, align:'center'}" >初中</th>
+        <th lay-data="{field:'studentNum04', width:100, sort: true, align:'center'}" >高中</th>
+        <th lay-data="{field:'graduatedStuNum', width:160, sort: true, align:'center'}" >毕业班（国际部）</th>
+        <th lay-data="{field:'studentNumAll', width:170, sort: true, align:'center'}" >总在校生（国际部）</th>
+        <th lay-data="{field:'studentCapacity', width:160, sort: true, align:'center'}" >总容量（国际部）</th>
+
+        <th lay-data="{field:'staffNum', width:100, sort: true,align:'center'}" >总员工</th>
+        <th lay-data="{field:'teacherNum', width:100, sort: true, align:'center'}" >总教师</th>
+        <th lay-data="{field:'foreignTeacherNum', width:100, sort: true, align:'center'}" >外籍教师</th>
+        <th lay-data="{field:'teacherStuRatio', width:100, sort: true, align:'center'}" >师生比</th>
+        <th lay-data="{field:'teacherRetention', width:120, sort: true, align:'center'}" >教师流失率</th>
+
+        <th lay-data="{field:'stuDominantNationality', width:120, sort: true,align:'center'}" >学生</th>
+        <th lay-data="{field:'presidentCountry', width:140, sort: true,align:'center'}" >校长/国际部主任</th>
+
+        <th lay-data="{field:'clubNum', width:120, sort: true,align:'center'}" >俱乐部数量</th>
+        <th lay-data="{field:'stuYearInvestment', width:120, sort: true,align:'center'}" >学生投入</th>
+        <th lay-data="{field:'teacherYearInvestment', width:120, sort: true,align:'center'}" >教师培训投入</th>
+
+        <th lay-data="{field:'coveredArea', width:140, sort: true,align:'center'}" >占地面积（亩）</th>
+        <th lay-data="{field:'builtArea', width:166, sort: true,align:'center'}" >建筑面积（平方米）</th>
+        <th lay-data="{field:'hardware', width:140, align:'center'}" >硬件设施</th>
+        <th lay-data="{field:'investment', width:140, align:'center'}" >投资信息</th>
+        <th lay-data="{field:'remark', width:140,align:'center'}" >备注</th>
+
+        <th lay-data="{field:'website', width:140,align:'center'}" >官网</th>
+        <th lay-data="{field:'telephone', width:140,align:'center'}" >电话</th>
+
+        <th lay-data="{field:'certificateAuthority', width:140,align:'center'}" >主流学术保障认证机构</th>
+        <th lay-data="{field:'studentEvaluation', width:140,align:'center'}" >学生评测</th>
+        <th lay-data="{field:'thirdOrganizations', width:140,align:'center'}" >第三方组织机构</th>
+        <th lay-data="{field:'courseAuthority', width:140,align:'center'}" >课程</th>
+    </tr>
+    </thead>
+    <div style="display:none;">
+        <img id="schoolShowSrc1" src="" alt="">
+        <img id="schoolShowSrc021" src="" alt="">
+        <img id="schoolShowSrc031" src="" alt="">
+        <img id="schoolShowSrc041" src="" alt="">
+        <img id="schoolShowSrc051" src="" alt="">
+    </div>
+</table>
+
+<!-- Modal 图片上传 -->
+
+
+<!--接受ID-->
+<input id="alter_old_School_id"  style="display: none;">
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">添加</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<!--<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>-->
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+
+<!--导出excel-->
+<script src="./plugins/outputData/jszip.js"></script>
+<script src="./plugins/outputData/xlsx.js"></script>
+<script src="./plugins/outputData/FileSaver.js"></script>
+
+<script src="./src/js/school/school.js?v=1.0.3"></script>
+
+
+<script>
+    $('#School_name').blur(function(){
+        if($('#School_name').val()==''){
+            return
+        }
+        $.ajax({
+            type: "get",
+            url: 'http://' + changeUrl.address + '/school/check_valid.do?schoolName='+$('#School_name').val(),
+            success: function (msg) {
+                if(msg.code===1){
+                    flag=layer.alert('学校名已存在',{
+                        skin: 'layui-layer-molv' //样式类名
+                        ,closeBtn: 0
+                        ,icon:4
+                    },function () {
+                        layer.close(flag)
+                         $('#School_name').val('')
+                    })
+                }
+            },
+            error: function () {
+                alert('网络繁忙，请稍后再试！');
+            }
+        });
+    })
+    $('#uploadSchoolLogoImg').click(function(e){
+        e.preventDefault()
+       
+        layer.open({
+            type: 2,
+            title:'学校logo上传',
+            shadeClose: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['620px', '540px'],
+            content: ['./up-school.html','no'],
+            success: function(layero, index){
+                // console.log(layero, index);
+                var body = layer.getChildFrame('body', index);
+                var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                iframeWin.autoClick()
+                layer.iframeAuto(index)
+                // console.log(body.html()) //得到iframe页的body内容
+                body.find('#alter_old_School_id').val()    //传输得到学校Id
+            }
+        });
+    })
+    $('#uploadSchoolShowImg').click(function(e){
+        e.preventDefault()
+        let flagStr=`<table class="layui-table">
+  <colgroup>
+    <col width="150">
+    <col width="200">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>图片编号</th>
+      <th>预览</th>
+      <th>编辑</th>
+    </tr> 
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><img style="width:160px;height:45px;" id="schoolShowSrc" src="" alt=""></td>
+      <td><button type="button" class="layui-btn" id="schoolShow" >
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><img style="width:160px;height:45px;" id="schoolShowSrc02" src="" alt=""></td>
+      <td><button type="button" class="layui-btn" id="schoolShow02" >
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><img style="width:160px;height:45px;" id="schoolShowSrc03" src="" alt=""></td>
+      <td><button type="button" class="layui-btn" id="schoolShow03" >
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><img style="width:160px;height:45px;" id="schoolShowSrc04" src="" alt=""></td>
+      <td><button type="button" class="layui-btn" id="schoolShow04" >
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><img style="width:160px;height:45px;" id="schoolShowSrc05" src="" alt=""></td>
+      <td><button type="button" class="layui-btn" id="schoolShow05" >
+          <i class="layui-icon">&#xe67c;</i>上传学校展示图片
+        </button></td>
+    </tr>
+  </tbody>
+</table>`
+        layer.open({
+            type: 1,
+            title:'学校展示图片上传(最多上传五张，请依次上传)',
+            shadeClose: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['900px', '440px'],
+            content: flagStr,
+            success: function(layero, index){
+                console.log($('#schoolShow1').attr('src'))
+                $('#schoolShowSrc').attr('src', $('#schoolShowSrc1').attr('src'))
+                $('#schoolShowSrc02').attr('src',$('#schoolShowSrc021').attr('src'))
+                $('#schoolShowSrc03').attr('src',$('#schoolShowSrc031').attr('src'))
+                $('#schoolShowSrc04').attr('src',$('#schoolShowSrc041').attr('src'))
+                $('#schoolShowSrc05').attr('src',$('#schoolShowSrc051').attr('src'))
+                function createUpload(upload,idName,idNameSrc){
+                    upload.render({
+                        elem: idName //绑定元素
+                        ,url: 'http://' + changeUrl.address + '/manager/talent/upload.do'
+                        ,data:{
+                            type:'nsi-pc/SchoolShow/'
+                        } //上传接口
+                        ,done: function(res){
+                            layer.alert('上传成功',{icon:1},function (index) {
+                                $(idNameSrc).attr('src',res.data.url)
+                                $(idNameSrc+'1').attr('src',res.data.url)
+                                layer.close(index);
+                            })
+                        }
+                        ,error: function(){
+                          //请求异常回调
+                        }
+                    });
+                }
+                layui.use('upload', function(){
+                  var upload = layui.upload;
+                  //执行实例
+
+                  createUpload(upload,'#schoolShow','#schoolShowSrc')
+                  createUpload(upload,'#schoolShow02','#schoolShowSrc02')
+                  createUpload(upload,'#schoolShow03','#schoolShowSrc03')
+                  createUpload(upload,'#schoolShow04','#schoolShowSrc04')
+                  createUpload(upload,'#schoolShow05','#schoolShowSrc05')
+                  
+                });
+            }
+        });
+    })
+    function autoClick() {
+        alert(1)
+        //$('#uploadSchoolLogoImgSrc').attr('src',localStorage['uploadImgSrc'])
+    }
+</script>
+</body>
+</html>

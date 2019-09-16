@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>专家库-添加</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./src/css/lib/cropper.min.css?v=65d004a665">
+    <style>
+        .layui-form-item .layui-input-inline {  width: 400px;margin-left: 15px; }
+        .layui-form-label{ width:120px;  }
+        .fl{float: left;}
+        .clearfix:after{content: "";display: block;clear: both;}
+         #dateGuest{
+            height: 38px;
+            width: 400px;
+            line-height: 1.3;
+            line-height: 38px\9;
+            border-width: 1px;
+            border-style: solid;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 160px;
+            font-weight: 400;
+            text-align: right;
+
+        }
+        .my-inline{
+            line-height: 40px;
+            text-align: left;
+            float: left;
+        }
+        .my-inline .layui-btn{
+            margin-left:0;
+        }
+    </style>
+
+</head>
+<body>
+<body style="margin-left:15px;margin-right: 15px;">
+<blockquote class="layui-elem-quote" style="margin-top: 20px;">您正在增加专家库信息</blockquote>
+<input type="text" id="parent_PeopleId" class="layui-hide">
+<div class="layui-form" style="margin-top: 20px;"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">头像：</label>
+        <img src="" width="80px;" height="80px" id="image" alt="">
+        <button type="button" class="layui-btn" id="test1">
+          <i class="layui-icon">&#xe67c;</i>上传头像
+        </button>
+        <span style="color:#999;font-size:14px;padding-left:10px;">*头像大小限制为1M</span>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="guestName" placeholder="" lay-verify="required" autocomplete="off" class="layui-input" id="guestName">
+        </div>
+        <div class="guestNameClass layui-form-mid layui-word-aux">*姓名不能为空</div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">电话：</label>
+        <div class="layui-input-inline">
+            <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="guestPhone">
+        </div>
+
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">邮箱：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="guestEmail">
+        </div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">职位：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="guestPost">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">公司：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="guestCompany">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">关系：</label>
+        <div class="layui-input-inline my-inline">
+            <input type="text" name="School_system" lay-verify="required"  autocomplete="off" placeholder="" class="layui-input" id="participants" >
+        </div>
+        <div class="layui-form-mid layui-word-aux">*注意：以分号结尾，不能为空</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline my-inline">
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('Vis2018；','participants') " value="Vis2018" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('Vis2017；','participants') " value="Vis2017" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand" onclick="Insert('Vis2016；','participants') " value="Vis2016" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;" onclick="Insert('Vis2015；','participants') " value="Vis2015" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;" onclick="Insert('在线课堂；','participants') " value="在线课堂" />
+            <input type="button" class="layui-btn layui-btn-normal" style="cursor:hand;" onclick="Insert('校长班；','participants') " value="校长班" />
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">生日：</label>
+        <div class="layui-input-inline">
+             <input type="text" id="dateGuest">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">身份证号：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="idCard">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">银行卡号：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="cardNumber">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">开户行：</label>
+        <div class="layui-input-inline">
+             <input type="text" name="" placeholder="" autocomplete="off" class="layui-input" id="banks">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">工作经历：</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="" class="layui-textarea"  id="guestProfile"></textarea>
+        </div>
+    </div>
+    
+
+    <!--墨绿分割线-->
+    <hr class="layui-bg-green" style="margin-top: 40px;margin-bottom: 20px;">
+
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align: center;">
+            <button class="layui-btn updateData" lay-submit lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</div>
+
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./plugins/lib/cropper.min.js"></script>
+
+<script src="./plugins/edit/wangEditor.js"></script>
+
+<script src="src/js/guest/addguest.js"></script>
+<script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        ,url: 'http://' + changeUrl.address + '/manager/talent/upload.do',
+         size:1024
+        ,data:{
+            type:'nsi-admin/guest/'
+        } //上传接口
+        ,done: function(res){
+            layer.alert('上传成功',{icon:1},function (index) {
+                $('#image').attr('src',res.data.url)
+                layer.close(index);
+            })
+        }
+        ,error: function(){
+          //请求异常回调
+        }
+      });
+    });
+    $('#fujian').change(function(){
+        var fileObj = document.getElementById("fujian").files[0]; // js 获取文件对象
+        var formFile = new FormData();
+        formFile.append("userMail", '111')
+        formFile.append("userTrueName", '2222')
+        formFile.append("action", "UploadVMKImagePath");  
+        formFile.append("file", fileObj); //加入文件对象
+        $.ajax({
+               url:'http://' + changeUrl.address + '/manager/talent/upfile.do',
+               data: formFile,
+               type: "Post",
+               dataType: "json",
+               cache: false,//上传文件无需缓存
+               processData: false,//用于对data参数进行序列化处理 这里必须false
+               contentType: false, //必须
+               success: function (result) {
+                console.log(result)
+                   layer.alert('上传成功',{icon:1},function (index) {
+                        layer.close(index);
+                        $('#fujian').attr('data',result.data.url)
+                    })
+               },
+           })
+    })
+    $('#guestName').keyup(function(){
+        console.log(1)
+        if($('#guestName').val().length<1){
+            $('.guestNameClass').html('*姓名不能为空')
+            return
+        }
+        $.ajax({
+           url:'http://' + changeUrl.address + '/manager/guest/check_name.do',
+           data: {
+                name:$('#guestName').val()
+           },
+           type: "Post",
+           dataType: "json",
+           success: function (result) {
+                if(result.code==0){
+                    $('.guestNameClass').html('*姓名不能为空')
+                }else{
+                    var datalength=result.data.length
+                    $('.guestNameClass').html('*数据库中存在'+datalength+'条数据')
+                    $('.guestNameClass').append('<span class="showcheckname" style="color:#F00;padding-left:5px;cursor:pointer;">点我查看</span>')
+                    $('.showcheckname').click(function(){
+                        let datas=''
+                        for (var i = 0; i < result.data.length; i++) {
+                            datas+='<tr class="num1"><td>'+result.data[i].guestName+'</td><td>'+result.data[i].guestCompany+'</td><td>'+result.data[i].submitter+'</td></tr>'
+                        };
+                        
+
+                        layer.open({
+                            type: 1,
+                            content: `<table class="layui-table">
+                                          <colgroup>
+                                            <col width="150">
+                                            <col width="200">
+                                            <col>
+                                          </colgroup>
+                                          <thead>
+                                            <tr>
+                                              <th>姓名</th>
+                                              <th>公司</th>
+                                              <th>上传人员</th>
+                                            </tr> 
+                                          </thead>
+                                          <tbody>
+                                            ${datas}
+                                          </tbody>
+                                        </table>`
+                        })
+                    })
+                }
+           },
+       })
+    })
+</script>
+</body>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+</head>
+
+<body>
+<form id="form01" enctype="multipart/form-data">
+    <input type="file" name="img" id="img"> <button id="btn01" type="btn" >提交</button>
+</form>
+
+</body>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script>
+    $('#btn01').click(function () {
+        var form01 = document.getElementById('form1')
+        var fd = new FormData(form01);
+        fd.append("Base64", '123', 'image.png');
+
+        //第三步，使用AJAX提交
+        $.ajax({
+            url: 'http://192.168.0.159:8080/nsi-1.0/Admin_api?whereFrom=TestEditorUpImg',
+//            url:'http://data.xinxueshuo.cn:80/nsi-0.9/Admin_api?whereFrom=EditorUpImg',
+            method: 'POST',
+            cache:false,
+            processData: false, //  不会将 data 参数序列化字符串
+            contentType: false, //  根据表单 input 提交的数据使用其默认的 contentType
+            data: fd,
+            success:function(data) {
+                console.log(data);
+                console.log(data.data[0])
+            },
+            error:function () {
+                alert('上传失败')
+            }
+        });
+        return false;
+    })
+</script>
+</html>

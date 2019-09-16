@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>作业管理</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+</head>
+<body style="margin: 15px;">
+    <blockquote class="layui-elem-quote instiTable" style="margin-top:20px;margin-bottom: 15px;">
+        <a class="layui-btn search_btn backjob">未审核作业</a>
+    </blockquote>
+<!--信息展示-->
+<table class="layui-hide" id="instiShow" lay-filter="instiShow"></table>
+<blockquote class="layui-elem-quote instiTable" style="margin-top:20px;margin-bottom: 15px;">
+        <a class="layui-btn search_btn backjob">已审核作业</a>
+    </blockquote>
+<table class="layui-hide" id="instiShow2" lay-filter="instiShow2"></table>
+
+<script type="text/html" id="barInsti">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">审核</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="barInsti2">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="barInsti3">
+    <a style="color:#409eff;cursor:pointer;" lay-event="edit">查看详细信息</a>
+</script>
+<script type="text/html" id="barInsti4">
+    <a style="color:#409eff;cursor:pointer;" lay-event="edit">查看详细信息</a>
+</script>
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./src/js/nsi-class/class-job.js"></script>
+
+</body>
+</html>

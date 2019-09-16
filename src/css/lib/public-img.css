@@ -1,0 +1,148 @@
+/* 选择上传图片*/
+.modal-title{
+    font-size: 14px;
+}
+.modal_row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.selectUpLoadLogo {
+    height: 300px;
+    width: 300px;
+    border-radius: 4px;
+    background: #efefef;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.lable_selectPic {
+    display: inline-block;
+    line-height: 20px;
+    color: #FFFFFF;
+    background-color: #337ab7;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0px #fff solid;
+    padding: 5px 5px 0;
+}
+
+.lable_selectPic>label {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.upLoadBtn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -33px;
+    margin-top: -12px;
+    z-index: 999;
+}
+
+.upLoadBtn>input[type=file] {
+    width: 188px;
+    height: 60px;
+    background: #333;
+    margin: 0 auto;
+    position: absolute;
+    right: 50%;
+    margin-right: -94px;
+    top: 0;
+    right/*\**/
+    : 0px\9;
+    margin-right/*\**/
+    : 0px\9;
+    width/*\**/
+    : 10px\9;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 2;
+}
+
+
+/* 预览图片 */
+
+.previewLogo {
+    /*width: 37%;*/
+    height: 300px;
+    padding: 50px 23px 0;
+    border-radius: 4px;
+    background: #efefef;
+    position: relative;
+    margin-left: 30px;
+}
+
+#preview{
+    /* position: absolute; */
+    display: inline-block;
+    /* margin: 50px auto; */
+    /*width: 100%;*/
+    width: 200px;
+    height: 200px;
+    background: #FFF;
+    border-radius: 4px;
+}
+
+.img-preview {
+    text-align: center;
+}
+
+.previewLogo ::before {
+    display: block;
+    position: absolute;
+    content: "预览图片";
+    left: 85px;
+    top: 15px;
+    letter-spacing: 2px;
+    font-family: "Microsoft YaHei"
+}
+
+.cropper-hidden {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+.cropper-crop-box {
+    width: 200px;
+    height: 200px;
+}
+
+.cropper-drag-box {
+    border-radius: 4px;
+}
+
+@media (max-width:768px) {
+    .cropper-point.point-se{
+        width: 5px;
+        height: 5px;
+    }
+    .previewLogo ::before {
+        left: 43%;
+        top: 17px;
+    }
+    .previewLogo {
+        /* margin-left: 20px; */
+        padding: 0 45px;
+        /* width: 100%; */
+        margin-left: 0;
+        margin-top: 80px;
+    }
+    #preview{
+        margin: 50px auto;
+        height: 200px;
+        width: 200px;
+    }
+    .selectUpLoadLogo {
+        margin-bottom: 5px;
+        height: 300px;
+    }
+    .modal-body {
+        padding: 15px 15px;
+    }
+}

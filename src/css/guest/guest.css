@@ -1,0 +1,428 @@
+
+.menu{
+    display:none;
+    background-color: #fff;
+    text-align: center;
+}
+.menu li a{
+    line-height: 2;
+}
+.menu li:hover{
+    background-color: #eaf3f7;
+    color:#fff;
+}
+
+.boxLogo{
+    background-color: #f5f5f5;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, .26);
+    width: 50%;
+    margin: 0px auto 25px;
+    padding-right: 40px;
+    border-radius: 5px;
+}
+.logoMove{
+    margin-bottom: 10px;
+    position: relative;
+    transition: all .3s;
+    top:0;
+}
+.logoMove:hover {
+    top:-5px;
+}
+.talentBtnDesc{
+    margin-bottom:15px;
+}
+
+.wrap h1 {
+    text-align: center;
+    color: #5da4e6;
+    font-weight: bold;
+}
+
+.header-search {
+    width: 400px;
+    height: 40px;
+    border: 1px solid #3297d8;
+    margin: 20px auto;
+    margin-top: 10px;
+    padding: 0;
+}
+
+#SearchButton {
+    background-image: url(search-button.png);
+    width: 78px;
+    height: 38px;
+    float: right;
+    border: 0;
+    line-height: 40px;
+    background-color: #5da4e6;
+    color: white;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+}
+
+.myBtn {
+    display: inline-block;
+    padding: 14px 30px 16px 30px;
+    margin: 50px 0;
+    font-size: 30px;
+    font-weight: bold;
+    background: rgb(33, 80, 137);
+    border: 0;
+}
+
+.myLable {
+    background: transparent;
+    color: #0C0C0C;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 0;
+    margin-right: 20px;
+}
+
+.content {
+    text-indent: 2em
+}
+
+.search_icon {
+    background: #215089;
+    left: 10px;
+    top: 0;
+    height: 40px;
+    width: 60px;
+    font-size: 24px;
+    padding-top: 2px;
+    border-radius: 0 5px 5px 0;
+    font-weight: 100;
+}
+
+@media screen and (max-width: 768px) {
+    /*搜索框*/
+    .header-search {
+        width: 334px;
+        height: 40px;
+        border: 1px solid #3297d8;
+        margin: 20px auto;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .pcPL170 {
+        padding-left: 170px;
+    }
+}
+
+
+/*zhang wen jia*/
+
+.dib {
+    display: inline-block;
+}
+
+
+/* 加入新学说数据库&发布招聘需求 */
+.talentBtn>.col-md-6>a {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    background:#ededed;
+    position: relative;
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 50px;
+    transition: all .5s;
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
+    /* box-shadow: 0 0 10px #215089; */
+}
+
+.talentBtn>.col-md-4>a {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    background:#ededed;
+    position: relative;
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 50px;
+    transition: all .5s;
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
+    /* box-shadow: 0 0 10px #215089; */
+}
+
+.talentBtn>.col-md-6>a.title_desc>span {
+    font-size: 55px;
+    color: #3775bf
+}
+
+.talentBtn>.col-md-4>a.title_desc>span {
+    font-size: 55px;
+    color: #3775bf
+}
+
+.talentBtnDesc {
+    color: #888;
+    /* text-align: left; */
+    font-size: 15px;
+    font-weight: 700;
+}
+.talentBtn>.col-md-6>a:hover {
+    background: #3775bf;
+}
+.talentBtn>.col-md-4>a:hover {
+    background: #c8c8c8;
+}
+
+.talentBtn>.col-md-6>a:hover .tochange {
+    color: #f3f3f3
+}
+.talentBtn>.col-md-4>a:hover .tochange {
+    color: #f3f3f3
+}
+
+.join,
+.release,.black {
+    padding-top: 8px;
+}
+/*.join{
+    padding-left:150px;
+}
+.release{
+    padding-right:150px;
+}*/
+
+#release span {
+    width: 300px;
+}
+
+@media (min-width:1199px) {
+    /*.join {
+        padding-left: 285px;
+    }*/
+    /*.release {
+        padding-right: 100px;
+    }*/
+    /*.black {
+        padding-right: 285px;
+    }*/
+}
+
+@media (max-width:992px) {
+    .talentBtn {
+        padding-bottom: 30px;
+    }
+    .join {
+        padding-left: 0;
+        padding-right: 29px;
+        margin-bottom: 30px;
+    }
+    .release {
+        padding-left: 0;
+        padding-right: 108px;
+        padding-bottom: 10px;
+    }
+}
+
+
+/* 搜索框 */
+
+.searchPart {
+    padding-top: 30px;
+}
+
+.searchPart .btns {
+    margin-bottom: 0;
+}
+
+.btns li input:hover {
+    background: #a2cdf7;
+    color: #FFF;
+}
+
+.btns li input.active {
+    background: #215089;
+    color: #FFF;
+}
+
+.searchForm {
+    
+}
+
+.btns {
+    padding-left: 3px;
+}
+
+.search_box {
+    padding-right: 0;
+    padding-left: 0;
+    width: 534px;
+    height: 40px;
+    border: 2px solid #215089;
+    margin: 0 auto 40px;
+    border-radius: 4px;
+    left:14px;
+}
+
+.search {
+    width: 100%;
+    padding-left: 10px;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    border: 0;
+    outline: none;
+    font-family: 'Microsoft YaHei';
+    margin-top: 1px;
+    /* border-radius: 4px; */
+    margin-left: 1px;
+}
+
+.search:focus {
+    box-shadow: 0 0 10px #000;
+}
+
+.sub {
+    width: 78px;
+    height: 40px;
+    border: 0;
+    line-height: 39px;
+    background-color: #215089;
+    color: white;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+    border-radius: 0 4px 4px 0;
+    margin-left: -2px;
+    z-index: 99;
+    position: relative;
+}
+
+.dib>input {
+    border: none;
+    background: none;
+    color: #3297d8;
+    padding-left: 10px;
+    outline: none;
+    height: 30px;
+    color: #215089;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px 4px 0 0;
+    margin-right: 2px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all .3s;
+    padding: 0 4px;
+}
+
+
+/* 热门搜索 */
+
+.hotSearch {
+    margin: 30px 0;
+    padding-left: 143px;
+    font-size: 15px;
+    position: relative;
+}
+
+.hotSearch::before {
+    display: inline-block;
+    content: "";
+    width: 22px;
+    height: 16px;
+    background: url("../../img/talent/cursor.gif");
+    position: absolute;
+    left: 115px;
+    top: 6px;
+}
+
+.hotSearch>a {
+    display: inline-block;
+    padding: 3px 5px;
+    border: 1px solid #215089;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.hotSearch>a:hover {
+    background: #215089;
+    color: #FFF;
+}
+
+@media (max-width:997px) {
+    .searchForm {
+        padding-left: 90px;
+    }
+    .hot {
+        padding-left: 122px;
+    }
+    .hotSearch::before {
+        left: 92px;
+    }
+}
+
+@media (max-width:768px) {
+    .searchForm {
+        padding-left: 64px;
+    }
+    .hotSearch {
+        padding-left: 97px;
+    }
+    .hotSearch::before {
+        left: 66px;
+    }
+}
+
+@media (max-width:579px) {
+    .searchForm {
+        padding-left: 0;
+    }
+    .hotSearch {
+        padding-left: 30px;
+    }
+    .hotSearch::before {
+        left: 1px;
+    }
+    .hotSearch>a {
+        margin: 0
+    }
+    .search,
+    .sub,
+    .rck {
+        font-size: 15px;
+        height: 35px;
+        line-height: 35px;
+    }
+    .btns .dib .rck {
+        font-size: 15px;
+    }
+}
+
+@media (max-width:376px) {
+    .sub {
+        width: 60px;
+    }
+    .hotSearch>a {
+        padding: 3px;
+    }
+}
+span.add{
+    background: #f6f6f6;
+    padding:10px 8px;
+    border-radius: 5px;
+    color:#999;
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+    left:30px;
+}
+span.add span.num{
+    background: #fff;
+    color:black;
+    margin: 5px;
+    padding:1px 3px;
+}

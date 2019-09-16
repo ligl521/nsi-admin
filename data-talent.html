@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>人才库</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+</head>
+<body style="margin: 15px;">
+<!--简历预览-->
+<div class="resumeView layui-hide">
+    <p><a href="http://data.xinxueshuo.cn/upFile/talent/yixin.he@edush.com%E4%BD%95%E6%80%BF%E6%98%95.pdf" target="_blank" id="resumeHref">1234</a></p>
+</div>
+
+<blockquote class="layui-elem-quote resumeTable" style="margin-top:20px;margin-bottom: 15px;">
+    <div class="layui-inline ">
+        <div class="layui-form layui-input-inline" >
+            全局搜索：
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input" id="resumeReload">
+        </div>
+        <a class="layui-btn search_btn" data-type="reload" ><i class="layui-icon">&#xe615;</i> 查询</a>
+    </div>
+    <div class="layui-inline" id="addPeople">
+        <a class="layui-btn layui-btn-normal newsAdd_btn"><i class="layui-icon">&#xe61f;</i> 添加人才</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn recommend" style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">&#x1002;</i> 刷新</a>
+    </div>
+</blockquote>
+<!--信息展示-->
+<table class="layui-hide" id="talentShow" lay-filter="talent">
+    
+</table>
+
+<script type="text/html" id="barTalent">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="pinglun">备注</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">查看附件</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./src/js/talent/data-talent.js"></script>
+<script>
+    $('#addPeople').click(function(){
+        layer.open({
+            type: 2,
+            title: '人才库-增加',
+            shadeClose: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: [$(window).width()*0.7+'px', $(window).height()*0.7+'px'],
+            content: './data-talent-add.html',
+            success: function(layero, index){
+                layer.full(index)
+                var body = layer.getChildFrame('body', index);
+                var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                // console.log(body.html()) //得到iframe页的body内容
+                //body.find('#parent_PeopleId').val(data.id)
+                //iframeWin.getInitData();
+            }
+        });
+    })
+</script>
+<script type="text/html" id="titleTpl">
+  {{#  if(d.image){ }}
+    <img width="20px" height="20px" src="{{ d.image}}">
+  {{#  } else { }}
+    <img width="20px" height="20px" src="https://nsi.oss-cn-zhangjiakou.aliyuncs.com/nsi-class/image/default.png">
+  {{#  } }}
+</script>
+</body>
+</html>

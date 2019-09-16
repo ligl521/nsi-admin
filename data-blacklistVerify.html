@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外教黑名单审核</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <style>
+        .text-center{text-align: center;}
+        .addscores .layui-btn{margin: 3px 0;}
+    </style>
+</head>
+<body style="margin: 15px;">
+<div id="addScores" class="addscores text-center" style="display:none;width: 360px;height:200px;background:#fff;">
+    <span class="layui-bg-red"style="padding:3px 5px;margin-top: 20px;display: inline-block;"><i class="layui-icon" style="font-size: 16px;">&#xe6af;</i> 该数据已通过审核，请选择要添加的分数~</span>
+    <div style="height: 4px;"></div>
+    <button class="layui-btn">+10 （评论）</button>
+    <button class="layui-btn">+30 （建议）</button>
+    <button class="layui-btn">+50 （机构 | 基本信息）</button>
+    <button class="layui-btn">+80  （学校）</button>
+    <button class="layui-btn">+100 （完整信息）</button>
+</div>
+
+<!--新增数据审核-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">新增黑外教数据审核
+    <div class="layui-inline" style="margin-left: 15px;">
+        <a class="layui-btn recommend" style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">ဂ</i> 刷新</a>
+    </div>
+</blockquote>
+<table class="layui-hide" id="addInfoShow" lay-filter="addInfoShow"></table>
+
+<!--修改数据审核-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">修改黑外教数据审核
+    <div class="layui-inline" style="margin-left: 15px;">
+        <a class="layui-btn " style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">ဂ</i> 刷新</a>
+    </div>
+</blockquote>
+<table class="layui-hide" id="reviseInfoShow" lay-filter="reviseInfoShow"></table>
+
+<!--新增数据审核-->
+<script type="text/html" id="addVerifyBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">拒绝</a>
+</script>
+
+<!--修改数据审核-->
+<script type="text/html" id="reviseVerifyBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">拒绝</a>
+</script>
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+
+<script src="./src/js/blacklist/data-blacklistVerify.js"></script>
+
+
+</body>
+</html>

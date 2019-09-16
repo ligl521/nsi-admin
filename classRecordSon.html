@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>机构库</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+</head>
+<body style="margin: 15px;">
+
+
+<blockquote class="layui-elem-quote instiTable" style="margin-top:20px;margin-bottom: 15px;">
+    <div class="layui-inline" id="addPeople">
+        <a class="layui-btn layui-btn-normal newsAdd_btn"><i class="layui-icon">&#xe61f;</i> 添加课程</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn recommend" style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">&#x1002;</i> 刷新</a>
+    </div>
+</blockquote>
+<!--信息展示-->
+<table class="layui-hide" id="instiShow" lay-filter="insti"></table>
+
+<script type="text/html" id="barInsti">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./src/js/classrecordSon/classrecord.js"></script>
+<script type="text/html" id="titleTpl">
+    {{#  if(d.listImg){ }}
+      <img width="30px" height="30px" src="{{ d.listImg}}">
+    {{#  } else { }}
+      <img width="30px" height="30px" src="https://nsi.oss-cn-zhangjiakou.aliyuncs.com/nsi-class/image/default.png">
+    {{#  } }}
+  </script>
+<script type="text/html" id="titleTpl1">
+    {{#  if(d.status==0){ }}
+      <span>上架</span>
+    {{#  } else { }}
+        <span>下架</span>
+    {{#  } }}
+</script>
+<script type="text/html" id="titleTpl2">
+    {{#  if(d.pattern==0){ }}
+      <span>付费</span>
+    {{#  } else { }}
+        <span>免费</span>
+    {{#  } }}
+  </script>
+<script>
+    $('#addPeople').click(function(){
+        layer.open({
+            type: 2,
+            title: '课程-增加',
+            shadeClose: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: [$(window).width()*0.7+'px', $(window).height()*0.7+'px'],
+            content: './classrecordAddSon.html',
+            success: function(layero, index){
+                layer.full(index)
+            }
+        });
+    })
+</script>
+</body>
+</html>

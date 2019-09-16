@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="flexible" content="initial-dpr=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>国际学校四库全书-新增数据</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/lib/cropper.min.css?v=65d004a665">
+    <link rel="stylesheet" href="./src/css/lib/public-img.css?v=dbdcd89ad1">
+    <style>
+        .nsiCourseAdd input , .nsiCourseEvaluationAdd input{margin-bottom: 6px;}
+        .form-control-feedback{  right:0  }
+        .btn-info{background: transparent;color: #0C0C0C;}
+        .fl{  float:left; }
+        .glyphicon-exclamation-sign{color: #999;}
+        .modal-dialog{
+            margin: 0 !important;
+        }
+        .modal-content{
+            border:0 !important;
+            border-radius: 0 !important;
+        }
+        #layui-layer-iframe2{
+            height: 485px;
+        }
+        #bgBlur{
+            height: 485px;
+        }
+        #myModal01{
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body id="bgBlur" >
+
+<!--图片上传-->
+<section class="text-center" style="margin-top:10px;height: 40px;border-bottom: 2px solid #efefef;visibility: -hidden;" >
+   <span style="background: #1d98de;color: #fff;font-size: 14px;border-radius: 5px;margin-right: 10px;"  data-toggle="modal" data-target="#myModal01" id="upLogo">上传学校logo图片</span>
+   <span style="background: #1d98de;color: #fff;padding:5px 10px;font-size: 14px;border-radius: 5px;" data-toggle="modal" data-target="#myModal01" id="upShow">上传学校展示图片</span>
+    <!--接受ID-->
+    <input id="alter_old_School_id"  type="text">
+</section>
+
+
+<!-- Modal 图片上传 -->
+<div class="modal fade" data-backdrop="static" id="myModal01" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width: 620px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                    <!--<span aria-hidden="true">&times;</span>-->
+                </button>
+                <h4 class="modal-title letter_spacing2 text-primary" id="myModalLabel">选择上传图片</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row modal_row clearfix">
+                    <!-- 选择上传图片 -->
+                    <div class="fl">
+                        <div class="selectUpLoadLogo " style="margin-top: 0px;">
+                            <img src="" alt="" class="cropper-hidden" id="image">
+                        </div>
+                        <div class="" style="margin-top:10px;margin-bottom: 0px;">
+                            <input type="file" id="inputImage"  class="btn btn-primary" accept="image/gif, image/jpeg, image/x-png">
+                        </div>
+                    </div>
+
+                    <!-- 预览图片 -->
+                    <div class="previewLogo fl" style="margin-top: 0px;">
+                        <div class="img-preview">
+                            <img src="" alt="" id="preview">
+                        </div>
+                    </div>
+                </div>
+                <textarea type="text" id="getData" class="hide" style="position:relative;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary hide"  id="startUpLogo">上传</button>
+                <button type="button" class="btn btn-primary hide"  id="startUpShow">上传</button>
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal" id="closeUpImg">关闭</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--页脚-->
+<!--#include virtual="../module/footer.html" -->
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js?v=d8ce92eefc"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script src="./plugins/lib/bootstrap.min.js?v=dfec174fba"></script>
+
+
+<!--图片上传-->
+<script src="./plugins/lib/cropper.min.js"></script>
+<script src="./plugins/lib/public-img.js?v=a915aa2823"></script>
+
+<script src="./plugins/lib/up-school.js?v=1d267e7e4d"></script>
+
+
+<script>
+    function autoClick() {
+        $('#upLogo').trigger('click')
+
+    }
+    function autoShowClick() {
+        $('#upShow').trigger('click')
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新学说课堂-直播配置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <style>
+        .text-center{text-align: center}
+        .hide{display: none;}
+    </style>
+</head>
+<body style="margin: 15px;">
+<!--直播配置-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">
+    直播配置
+</blockquote>
+<fieldset class="layui-elem-field " style="margin-top: 15px;margin-bottom: 15px;">
+    <legend>当前直播 / 即将直播课程</legend>
+
+    <table class="layui-table" style="margin-left: 50px;width: auto;margin-top: 20px;margin-bottom: 20px;">
+        <colgroup>
+            <col width="400">
+            <col width="200">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>直播课程</th>
+            <th>直播讲师</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="CourseName"></td>
+            <td id="TeacherName"></td>
+        </tr>
+
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="layui-elem-field " style="margin-top: 15px;margin-bottom: 15px;">
+    <legend>配置直播课程</legend>
+    <form class="layui-form" action="" style="margin-top:15px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">课程ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CourseId" lay-verify="number" autocomplete="off" class="layui-input" id="CourseId">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">教师ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="TeacherId" lay-verify="number" autocomplete="off" class="layui-input" id="TeacherId">
+                </div>
+            </div>
+            <div class="layui-inline" style="margin-left: 15px;">
+                <button class="layui-btn layui-btn-radius" style="background:#F00;" lay-submit lay-filter="demo1">确 认</button>
+            </div>
+        </div>
+    </form>
+</fieldset>
+<!--直播配置-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">
+    生成邀请码
+</blockquote>
+
+<form class="layui-form" action="" style="margin-top:15px;">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">课程ID</label>
+            <div class="layui-input-inline">
+                <input type="text" name="CourseId" lay-verify="number" autocomplete="off" class="layui-input" id="inviteCourseId">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 100px;">生成邀请码数量</label>
+            <div class="layui-input-inline">
+                <input type="text"  lay-verify="number" autocomplete="off" class="layui-input" id="Number">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 40px;">备注</label>
+            <div class="layui-input-inline">
+                <input type="text"  placeholder="例如：某某机构/某某人" autocomplete="off" class="layui-input" id="Text">
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left: 15px;">
+            <button class="layui-btn layui-btn-radius" lay-submit lay-filter="demo2">确 认</button>
+        </div>
+    </div>
+</form>
+<!--数据库的邀请码-->
+<table class="layui-table" style="margin-left: 52px;width: auto;margin-top: 20px;margin-bottom: 20px;">
+    <colgroup>
+        <col width="150">
+        <col width="100">
+        <col width="300">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>邀请码</th>
+        <th>状态</th>
+        <th>备注</th>
+        <th>邀请码生成时间</th>
+        <th>邀请码使用时间</th>
+    </tr>
+    </thead>
+
+    <tbody id="inviteCodeview">
+    <!--生成邀请码-->
+    </tbody>
+</table>
+<!--临时账号-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">
+    临时账号
+</blockquote>
+
+<form class="layui-form" action="" style="margin-top:15px;">
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin-left: 15px;">
+            <button class="layui-btn layui-btn-radius" style="background:#3385ff;" id="changeflagaccount">修改密码</button>
+        </div>
+    </div>
+</form>
+<table class="layui-hide" id="flagaccount" lay-filter="flagaccount"></table>
+<!--用户权限-->
+<blockquote class="layui-elem-quote  layui-text" style="margin: 15px 0;">用户课程权限
+    <div class="layui-inline" style="margin-left: 15px;">
+        <a class="layui-btn recommend" style="background-color:#5FB878" onclick="window.location.reload()"> <i class="layui-icon">ဂ</i> 刷新</a>
+    </div>
+    <div class="layui-inline" style="margin-left: 15px;">
+        <div class="layui-form-mid " style="float:none;color: #FF5722;">*数据修改后请注意刷新页面获取最新数据</div>
+    </div>
+</blockquote>
+<fieldset class="layui-elem-field " style="margin-top: 15px;margin-bottom: 15px;">
+    <legend>设置用户观看课程权限</legend>
+    <h3 style="margin-top: 15px;margin-left:53px;font-weight: bold;">添加单节课程权限：</h3>
+    <div style="margin-left: 53px;color: red;">注意：新添加一个课程之时，请先把以前的课程也加上对应权限</div>
+    <form class="layui-form" action="" style="margin-top:15px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">课程ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CourseId" autocomplete="off" class="layui-input" id="courseRightsId">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">用户邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="TeacherId" lay-verify="email" autocomplete="off" class="layui-input" id="emailRightsId">
+                </div>
+            </div>
+            <div class="layui-inline" style="margin-left: 15px;">
+                <button class="layui-btn layui-btn-radius" lay-submit lay-filter="watchRights">确 认</button>
+            </div>
+        </div>
+        <div class="classBtn" style="margin-left: 55px;">
+                <button class="layui-btn layui-btn-normal" data="HRCData">HRC人力资源</button>
+                <button class="layui-btn layui-btn-normal" data="MACData1">MAC市场招生</button>
+                <button class="layui-btn layui-btn-normal" data="MACData2">MAC临时</button>
+        </div>
+    </form>
+    
+    <h3 style="margin-top: 20px;margin-left:53px;font-size:20px;font-weight: bold;">新开课程：</h3>
+    <div style="margin-left: 53px;color: red;margin-top:5px;">注意：该操作将赋予全部用户新开课程的观看权限，请慎重使用~</div>
+    <form class="layui-form" action="" style="margin-top:15px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">课程ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CourseId" lay-verify="number" autocomplete="off" class="layui-input" id="courseRightsId02">
+                </div>
+            </div>
+            <div class="layui-inline" style="margin-left: 15px;">
+                <button class="layui-btn layui-btn-danger" lay-submit lay-filter="watchRights02">确 认</button>
+            </div>
+        </div>
+    </form>
+
+</fieldset>
+
+<div class="course_user_table">
+    <div class="layui-inline ">
+        <div class="layui-form layui-input-inline" >
+            搜索课程或用户：
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" value="" placeholder="请输入课程ID" class="layui-input search_input" id="courseReload">
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" value="" placeholder="请输入邮箱" class="layui-input search_input" id="emailReload">
+        </div>
+        <a class="layui-btn search_btn" data-type="reload" ><i class="layui-icon">&#xe615;</i> 查询</a>
+    </div>
+
+</div>
+
+
+<table class="layui-hide" id="userCourseRights" lay-filter="userCourseFilter"></table>
+<script type="text/html" id="userCourseBar">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">查看</a>
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+</script>
+
+
+<script id="demo" type="text/html">
+    {{# layui.each(d.data,function(index,val) { }}
+    <tr>
+        <td>{{ val }}</td>
+        <td > <span class="btn layui-btn layui-btn-sm" data-clipboard-text="{{ val }}" id="copy{{ index }}">复制</span></td>
+    </tr>
+    {{#  }); }}
+
+    {{#  if(d.data.length === 0){ }}
+    <tr>
+        <td>无数据</td>
+        <td>无数据</td>
+    </tr>
+    {{#  } }}
+</script>
+
+<script id="ivCodeDemo" type="text/html">
+    {{# layui.each(d.data,function(index,item){  }}
+    <tr>
+        <td>{{ item.activationCode}}</td>
+        <td> <span class="{{ item.valid==0?'layui-bg-green':'layui-bg-red'}}" style="padding:5px 8px;">{{ item.valid==0?'未使用':'已使用'}}</span></td>
+        <td>{{ item.text}}</td>
+        <td>{{ item.loadTime}}</td>
+        <td><span class="{{ item.userTime==0?'layui-bg-green':'layui-bg-black'}}" style="padding:5px 8px;">{{ item.userTime ==0?'未使用':item.userTime}}</span></td>
+    </tr>
+    {{#  });  }}
+
+    {{#   if(d.data.length === 0){  }}
+    无数据
+    {{#  } }}
+</script>
+
+
+
+<script src="./plugins/layui/layui.js"></script>
+<script src="./plugins/jq/jquery.min.js"></script>
+<script src="./plugins/clipboard/clipboard.min.js"></script>
+<script src="./plugins/jq/jquery.cookie.js"></script>
+<script src="./src/js/config.js"></script>
+<script>
+    $('.classBtn button').click(function(e){
+        e.preventDefault()
+        let datas=$(this).attr('data')
+        switch(datas){
+            case 'HRCData':
+                $('#courseRightsId').val('10001,10002,10003,10004,10005,10006,10007,10008,10009,10010,10011,10012,10013')
+            break;
+            case 'MACData1':
+                $('#courseRightsId').val('20001,20002,20003,20004,20005,20006,20007,20008,20009,20010,20011,20012,20013,20014')
+            break;
+            case 'MACData2':
+                $('#courseRightsId').val('20002,20003,20004,20005,20006,20007,20008,20009,20010,20011,20012,20013,20014')
+            break;
+        }
+        console.log($(this).attr('data'))
+    })
+</script>
+<script src="./src/js/nsi-class/class-settings.js?v=1.0.5"></script>
+<script>
+    //    第三步：初始无数据
+    layui.use('laytpl',function () {
+        var laytpl = layui.laytpl
+        var data = { //数据
+            "data":[]
+        }
+        var getTpl = demo.innerHTML
+            ,view = document.getElementById('view');
+        laytpl(getTpl).render(data, function(html){
+            view.innerHTML = html;
+        })
+    })
+</script>
+
+<script>
+    var clipboard = new Clipboard('.btn');
+    clipboard.on('success', function(e) {
+        console.log(e)
+        layui.use('layer',function () {
+            var layer = layui.layer
+            layer.tips('复制成功','#'+e.trigger.id);
+        })
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+</script>
+
+
+</body>
+</html>
