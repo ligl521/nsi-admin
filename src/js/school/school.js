@@ -1,4 +1,4 @@
-<!-- 省市联动 -->
+//<!-- 省市联动 -->
 //定义数组，存储省份信息
 var province = ["", "北京", "上海", "天津", "重庆", "浙江", "江苏", "广东", "福建", "湖南", "湖北", "辽宁",
     "吉林", "黑龙江", "河北", "河南", "山东", "陕西", "甘肃", "新疆", "青海", "山西", "四川",
@@ -542,62 +542,62 @@ layui.use('table', function () {
                 // console.log(msg.Areas)
                 setCityEdit(autoDeleteZero(msg.areas)) //设置地区数据      
                 $('#School_name-edit').val(autoDeleteZero(msg.schoolName)),
-                    $('#School_EnglishName-edit').val(autoDeleteZero(msg.schoolEnglishname)),
-                    $('#School_properties-edit').val(autoDeleteZero(msg.schoolProperties)),
-                    $("#selProvince-edit option[value='" + autoDeleteZero(msg.areas) + "']").attr("selected", true),
-                    $("#selCity-edit option[value='" + autoDeleteZero(msg.areas02) + "']").attr("selected", true),
-                    $('#Areas03-edit').val(autoDeleteZero(msg.areas03)),
-                    $('#Founded_time-edit').val(autoDeleteZero(msg.foundedTime)),
-                    $('#OperationState-edit').val(autoDeleteZero(msg.operationstate)),
-                    $('#School_system-edit').val(autoDeleteZero(msg.schoolSystem)),
+                $('#School_EnglishName-edit').val(autoDeleteZero(msg.schoolEnglishname)),
+                $('#School_properties-edit').val(autoDeleteZero(msg.schoolProperties)),
+                $("#selProvince-edit option[value='" + autoDeleteZero(msg.areas) + "']").attr("selected", true),
+                $("#selCity-edit option[value='" + autoDeleteZero(msg.areas02) + "']").attr("selected", true),
+                $('#Areas03-edit').val(autoDeleteZero(msg.areas03)),
+                $('#Founded_time-edit').val(autoDeleteZero(msg.foundedTime)),
+                $('#OperationState-edit').val(autoDeleteZero(msg.operationstate)),
+                $('#School_system-edit').val(autoDeleteZero(msg.schoolSystem)),
 
-                    $('#Tuition01-edit').val(autoDeleteZero(msg.tuition01)),
-                    $('#Tuition02-edit').val(autoDeleteZero(msg.tuition02)),
-                    $('#Tuition03-edit').val(autoDeleteZero(msg.tuition03)),
-                    $('#Tuition04-edit').val(autoDeleteZero(msg.tuition04)),
+                $('#Tuition01-edit').val(autoDeleteZero(msg.tuition01)),
+                $('#Tuition02-edit').val(autoDeleteZero(msg.tuition02)),
+                $('#Tuition03-edit').val(autoDeleteZero(msg.tuition03)),
+                $('#Tuition04-edit').val(autoDeleteZero(msg.tuition04)),
 
-                    $('#TuitionHigh-edit').val(autoDeleteZero(msg.TuitionHigh)),
-                    $('#Website-edit').val(autoDeleteZero(msg.website)),
-                    $('#Telephone-edit').val(autoDeleteZero(msg.telephone)),
-                    $('#Inter_Course_Founded_time-edit').val(autoDeleteZero(msg.interCourseFoundedTime)),
-                    $('#Course-edit').val(autoDeleteZero(msg.course)),
-                    $('#Authentication-edit').val(autoDeleteZero(msg.authentication)),
-                    $('#Course_evaluation-edit').val(autoDeleteZero(msg.courseEvaluation)),
+                $('#TuitionHigh-edit').val(autoDeleteZero(msg.TuitionHigh)),
+                $('#Website-edit').val(autoDeleteZero(msg.website)),
+                $('#Telephone-edit').val(autoDeleteZero(msg.telephone)),
+                $('#Inter_Course_Founded_time-edit').val(autoDeleteZero(msg.interCourseFoundedTime)),
+                $('#Course-edit').val(autoDeleteZero(msg.course)),
+                $('#Authentication-edit').val(autoDeleteZero(msg.authentication)),
+                $('#Course_evaluation-edit').val(autoDeleteZero(msg.courseEvaluation)),
 
-                    $('#Student_Num01-edit').val(autoDeleteZero(msg.studentNum01)),
-                    $('#Student_Num02-edit').val(autoDeleteZero(msg.studentNum02)),
-                    $('#Student_Num03-edit').val(autoDeleteZero(msg.studentNum03)),
-                    $('#Student_Num04-edit').val(autoDeleteZero(msg.studentNum04)),
+                $('#Student_Num01-edit').val(autoDeleteZero(msg.studentNum01)),
+                $('#Student_Num02-edit').val(autoDeleteZero(msg.studentNum02)),
+                $('#Student_Num03-edit').val(autoDeleteZero(msg.studentNum03)),
+                $('#Student_Num04-edit').val(autoDeleteZero(msg.studentNum04)),
 
-                    $('#Student_Num_All-edit').val(autoDeleteZero(msg.studentNumAll)),
-                    $('#Student_Capacity-edit').val(autoDeleteZero(msg.studentCapacity)),
-                    $('#Graduated_Stu_Num-edit').val(autoDeleteZero(msg.graduatedStuNum)),
-                    $('#Stu_Dominant_nationality-edit').val(autoDeleteZero(msg.stuDominantNationality)),
-                    $('#Stu_Year_Investment-edit').val(autoDeleteZero(msg.stuYearInvestment)),
-                    $('#Club_Num-edit').val(autoDeleteZero(msg.clubNum)),
-                    $('#President_Country-edit').val(autoDeleteZero(msg.presidentCountry)),
-                    $('#Staff_Num-edit').val(autoDeleteZero(msg.staffNum)),
-                    $('#Teacher_Num-edit').val(autoDeleteZero(msg.teacherNum)),
-                    $('#Foreign_Teacher_num-edit').val(autoDeleteZero(msg.foreignTeacherNum)),
-                    $('#Teacher_Year_Investment-edit').val(autoDeleteZero(msg.teacherYearInvestment)),
-                    $('#Teacher_Retention-edit').val(autoDeleteZero(msg.teacherRetention)),
-                    $('#Teacher_Salary-edit').val(autoDeleteZero(msg.teacherSalary)),
-                    $('#Teacher_Stu_ratio-edit').val(autoDeleteZero(msg.teacherStuRatio)),
-                    $('#Covered_Area-edit').val(autoDeleteZero(msg.coveredArea)),
-                    $('#Built_Area-edit').val(autoDeleteZero(msg.builtArea)),
-                    $('#Hardware-edit').val(autoDeleteZero(msg.hardware)),
-                    $('#Investment-edit').val(autoDeleteZero(msg.investment)),
-                    $('#Remark-edit').val(autoDeleteZero(msg.remark)),
-                    $('#Recent_Modifier-edit').val(autoDeleteZero(msg.recentModifier)),
-                    $('#Load_People-edit').val(autoDeleteZero(msg.loadPeople)),
-                    $('#Load_Time-edit').val(autoDeleteZero(msg.loadTime)),
+                $('#Student_Num_All-edit').val(autoDeleteZero(msg.studentNumAll)),
+                $('#Student_Capacity-edit').val(autoDeleteZero(msg.studentCapacity)),
+                $('#Graduated_Stu_Num-edit').val(autoDeleteZero(msg.graduatedStuNum)),
+                $('#Stu_Dominant_nationality-edit').val(autoDeleteZero(msg.stuDominantNationality)),
+                $('#Stu_Year_Investment-edit').val(autoDeleteZero(msg.stuYearInvestment)),
+                $('#Club_Num-edit').val(autoDeleteZero(msg.clubNum)),
+                $('#President_Country-edit').val(autoDeleteZero(msg.presidentCountry)),
+                $('#Staff_Num-edit').val(autoDeleteZero(msg.staffNum)),
+                $('#Teacher_Num-edit').val(autoDeleteZero(msg.teacherNum)),
+                $('#Foreign_Teacher_num-edit').val(autoDeleteZero(msg.foreignTeacherNum)),
+                $('#Teacher_Year_Investment-edit').val(autoDeleteZero(msg.teacherYearInvestment)),
+                $('#Teacher_Retention-edit').val(autoDeleteZero(msg.teacherRetention)),
+                $('#Teacher_Salary-edit').val(autoDeleteZero(msg.teacherSalary)),
+                $('#Teacher_Stu_ratio-edit').val(autoDeleteZero(msg.teacherStuRatio)),
+                $('#Covered_Area-edit').val(autoDeleteZero(msg.coveredArea)),
+                $('#Built_Area-edit').val(autoDeleteZero(msg.builtArea)),
+                $('#Hardware-edit').val(autoDeleteZero(msg.hardware)),
+                $('#Investment-edit').val(autoDeleteZero(msg.investment)),
+                $('#Remark-edit').val(autoDeleteZero(msg.remark)),
+                $('#Recent_Modifier-edit').val(autoDeleteZero(msg.recentModifier)),
+                $('#Load_People-edit').val(autoDeleteZero(msg.loadPeople)),
+                $('#Load_Time-edit').val(autoDeleteZero(msg.loadTime)),
 
-                    $('#certificate_authority-edit').val(autoDeleteZero(msg.certificateAuthority)),
-                    $('#student_evaluation-edit').val(autoDeleteZero(msg.studentEvaluation)),
-                    $('#third_organizations-edit').val(autoDeleteZero(msg.thirdOrganizations)),
-                    $('#course_authority-edit').val(autoDeleteZero(msg.courseAuthority)),
+                $('#certificate_authority-edit').val(autoDeleteZero(msg.certificateAuthority)),
+                $('#student_evaluation-edit').val(autoDeleteZero(msg.studentEvaluation)),
+                $('#third_organizations-edit').val(autoDeleteZero(msg.thirdOrganizations)),
+                $('#course_authority-edit').val(autoDeleteZero(msg.courseAuthority)),
 
-                    $('#alter_old_School_id-edit').val(msg.id)
+                $('#alter_old_School_id-edit').val(msg.id)
                 $('#uploadSchoolLogoImgSrc').attr('src', 'https://data.xinxueshuo.cn' + msg.schoolLogo)
                 $('#uploadSchoolLogoImgSrc').attr('data', msg.schoolLogo)
 
@@ -616,7 +616,20 @@ layui.use('table', function () {
                 });
 
                 form.on('submit(school-revise)', function (res) {
-                    console.log($('#schoolShowSrc').attr('src'))
+                    //验证官网 前缀 和 最后一个字符
+                    let SumWebsite = $('#Website-edit').val();
+                    if (/(https):\/\/([\w.]+\/?)\S*/.test(SumWebsite)) {
+                        SumWebsite = SumWebsite.substring(8)
+                    } else {
+                        if (/(http):\/\/([\w.]+\/?)\S*/.test(SumWebsite)) {
+                            SumWebsite = SumWebsite.substring(7)
+                        }
+                    }
+                    if (SumWebsite.charAt(SumWebsite.length - 1) == "/") {
+                        SumWebsite = SumWebsite.substring(0, SumWebsite.length - 1)
+                    }
+                    console.log(SumWebsite)
+                    //提交form表单
                     var insertData = {
                         'schoolName': autoAddZero($('#School_name-edit').val()),
                         'schoolEnglishname': autoAddZero($('#School_EnglishName-edit').val()),
@@ -635,10 +648,10 @@ layui.use('table', function () {
                         'tuition04': autoAddZero($('#Tuition04-edit').val()),
 
 
-                        'website': autoAddZero($('#Website-edit').val()),
+                        'website': autoAddZero(SumWebsite),
                         'telephone': autoAddZero($('#Telephone-edit').val()),
                         'interCourseFoundedTime': autoAddZero($('#Inter_Course_Founded_time-edit').val()),
-                        'course': autoAddZero($('#Course-edit').val()),
+                        'course': autoAddZero($('#Course-edit').val()) == "" ? "无" : autoAddZero($('#Course-edit').val()),
                         'authentication': autoAddZero($('#Authentication-edit').val()),
                         'courseEvaluation': autoAddZero($('#Course_evaluation-edit').val()),
                         'studentNumAll': autoAddZero($('#Student_Num_All-edit').val()),
@@ -668,10 +681,10 @@ layui.use('table', function () {
                         'remark': autoAddZero($('#Remark-edit').val()),
 
                         "loadPeople": $.cookie('username'),
-                        "certificateAuthority": autoAddZero($('#certificate_authority-edit').val()),
-                        "studentEvaluation": autoAddZero($('#student_evaluation-edit').val()),
-                        "thirdOrganizations": autoAddZero($('#third_organizations-edit').val()),
-                        "courseAuthority": autoAddZero($('#course_authority-edit').val()),
+                        "certificateAuthority": autoAddZero($('#certificate_authority-edit').val()) == "" ? "无" : autoAddZero($('#certificate_authority-edit').val()),
+                        "studentEvaluation": autoAddZero($('#student_evaluation-edit').val()) == "" ? "无" : autoAddZero($('#student_evaluation-edit').val()),
+                        "thirdOrganizations": autoAddZero($('#third_organizations-edit').val()) == "" ? "无" : autoAddZero($('#third_organizations-edit').val()),
+                        "courseAuthority": autoAddZero($('#course_authority-edit').val()) == "" ? "无" : autoAddZero($('#course_authority-edit').val()),
                         "id": msg.id,
                         "schoolLogo": $('#uploadSchoolLogoImgSrc').attr('data'),
                         "schoolShow": $('#schoolShowSrc1').attr('src'),
@@ -833,12 +846,24 @@ layui.use('form', function () {
     //监听提交
     form.on('submit(demo1)', function (res) {
         console.log("---------")
-        console.log(res)
-        console.log(autoAddZero)
+        // console.log(res)
+        // console.log(autoAddZero);
+        //验证官网 前缀 和 最后一个字符
+        let SumWebsite = $('#Website').val();
+        if (/(https):\/\/([\w.]+\/?)\S*/.test(SumWebsite)){
+            SumWebsite = SumWebsite.substring(8)
+        }else{
+            if (/(http):\/\/([\w.]+\/?)\S*/.test(SumWebsite)){
+                SumWebsite = SumWebsite.substring(7) 
+            }
+        }
+        if(SumWebsite.charAt(SumWebsite.length-1) == "/"){
+            SumWebsite = SumWebsite.substring(0,SumWebsite.length-1) 
+        }
         // layer.alert(JSON.stringify(res.field), {
         //     title: '最终的提交信息'
         // })
-
+        //提交form 表单
         var insertData = {
             'schoolName': autoAddZero($('#School_name').val()),
             'schoolEnglishname': autoAddZero($('#School_EnglishName').val()),
@@ -856,7 +881,7 @@ layui.use('form', function () {
             'tuition04': autoAddZero($('#Tuition04').val()),
 
             'tuitionhigh': autoAddZero($('#TuitionHigh').val()),
-            'website': autoAddZero($('#Website').val()),
+            'website': autoAddZero(SumWebsite),
             'telephone': autoAddZero($('#Telephone').val()),
             'interCourseFoundedTime': autoAddZero($('#Inter_Course_Founded_time').val()),
             'course': autoAddZero($('#Course').val()) == "" ? "无" : autoAddZero($('#Course').val()),
@@ -895,7 +920,7 @@ layui.use('form', function () {
 
             //"member_sign":$.cookie('usertitle')
         }
-        console.log(insertData)
+        // console.log(insertData)
           $.ajax({
               type: "post",
               async: false,
