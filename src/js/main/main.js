@@ -94,7 +94,7 @@ $.ajax({
         $('#pageCount').text(msg.pageCount)
     },
     error: function () {
-        alert('网络繁忙，请稍后再试！');
+        // alert('网络繁忙，请稍后再试！');
     }
 });
 
